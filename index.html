@@ -781,9 +781,7 @@ function copyCard(btn, text){
     setTimeout(function(){btn.textContent='📋 复制';},2000);
   }
 function cardFeedback(text){
-  fbCardContext = text;
   openFeedback();
-  document.getElementById('fbText').placeholder = '对这条回答的想法…（回答内容已自动附带）';
 }
 
 // ═══ 树洞 ═══
@@ -1069,6 +1067,7 @@ function burstParticles(x, y) {
 
 // ═══ 更新日志 ═══
 var CHANGELOG = [
+  {v:'v1.6',date:'2026.06.08',items:['📱 PWA 支持：可添加到桌面，全屏体验，离线缓存','📊 百度统计接入，后台看访问数据','💬 反馈接入腾讯问卷，用户留言直达后台']},
   {v:'v1.5',date:'2026.06.08',items:['📱 全面移动端适配：安全区、触屏优化、小屏兼容','🤏 3D 卡片支持触屏倾斜（touchmove）','📐 横屏/矮屏适配，弹窗不溢出','⚡ 触摸响应加速，去掉移动端点击延迟']},
     {v:'v1.4',date:'2026.06.08',items:['🧠 树洞人格重塑：更懂情绪、更有真人感、不再说"AI 式"的话','🌲 树洞介绍去 AI 化，更像一个安静的角落']},
     {v:'v1.3 Pro Max',date:'2026.06.08',items:['🎨 Logo 流动渐变 + 柔和光晕，品牌感升级','💧 按钮点击涟漪效果，每次点击都有水波纹反馈','🃏 文案卡片 3D 景深倾斜，随鼠标移动立体翻转','🎉 复制文案撒花粒子，8 种 emoji 随机爆开','🦴 骨架屏加载动画，替代单调的圆点等待','🎯 弹性动画曲线，交互更自然流畅']},
@@ -1094,13 +1093,7 @@ var fbType = FB_TYPES[0];
 var fbCardContext = '';
 
 function openFeedback(){
-  var row = document.getElementById('fbTypeRow');
-  row.innerHTML = FB_TYPES.map(function(t){
-    return '<button class="fb-type-chip'+(t===fbType?' on':'')+'" onclick="pickFbType(\''+t+'\',this)">'+t+'</button>';
-  }).join('');
-  document.getElementById('fbText').value = '';
-  if (!fbCardContext) document.getElementById('fbText').placeholder = '写下你想说的话…';
-  document.getElementById('fbOverlay').classList.add('show');
+  window.open('https://wj.qq.com/s2/26960842/7f44/', '_blank');
 }
 function closeFeedback(){ document.getElementById('fbOverlay').classList.remove('show'); }
 
