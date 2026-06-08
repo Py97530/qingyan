@@ -332,6 +332,12 @@
     .th-intro .thi-badge{margin-top:8px}
   }
 </style>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1c1612" id="meta-theme">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="./icon-512.png">
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -639,6 +645,8 @@ var themeData = [
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('qy_theme', t);
+  var mc = document.getElementById('meta-theme');
+  if(mc){ mc.content = t==='morning'?'#faf7f2':t==='dusk'?'#1a1b2e':'#1c1612'; }
 }
 
 function setTheme(t, el){
@@ -1159,6 +1167,12 @@ init();
   });
   cardObserver.observe(document.getElementById('copyResults'), {childList: true});
 
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
 </script>
 
 </body>

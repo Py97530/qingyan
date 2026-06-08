@@ -1,13 +1,19 @@
 {
-  "name": "轻言 · 温柔文案与树洞",
+  "name": "轻言 · AI文案与树洞",
   "short_name": "轻言",
-  "description": "一个温柔的角落——生成朋友圈文案，找到懂你的AI树洞",
+  "description": "安静的角落，有人会认真听——生成朋友圈文案，找到懂你的树洞",
   "start_url": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1c1612",
   "theme_color": "#1c1612",
   "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
