@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>轻言 - 文案 & 树洞 | 设计样图</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f0f1a;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 20px;
+  }
+
+  .phone {
+    width: 390px; height: 760px;
+    background: #1a1a2e;
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 2px #2a2a3e;
+    display: flex; flex-direction: column;
+  }
+
+  /* 顶栏 */
+  .topbar {
+    padding: 16px 20px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #1f1f35;
+  }
+  .logo { font-size: 1.2rem; font-weight: 700; color: #e8d5b7; letter-spacing: 2px; }
+  .top-actions { display: flex; gap: 12px; }
+  .top-btn { color: #777; font-size: 0.85rem; cursor: pointer; }
+
+  /* 主 tab */
+  .tabs {
+    display: flex; margin: 12px 16px;
+    background: #111; border-radius: 20px; padding: 3px;
+  }
+  .tab {
+    flex: 1; text-align: center; padding: 10px 0;
+    border-radius: 18px; font-size: 0.9rem; cursor: pointer;
+    transition: all 0.3s; color: #666;
+  }
+  .tab.active { background: #2a2a3e; color: #e8d5b7; font-weight: 600; }
+
+  .content { flex: 1; overflow-y: auto; padding: 0 16px; }
+
+  /* ===== 文案模式 ===== */
+  .copy-scene { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .scene-chip {
+    font-size: 0.75rem; padding: 6px 14px;
+    border-radius: 20px; border: 1px solid #2a2a3e;
+    color: #aaa; cursor: pointer; transition: 0.2s;
+  }
+  .scene-chip:hover, .scene-chip.on { border-color: #c9a96e; color: #c9a96e; background: rgba(201,169,110,0.08); }
+
+  .input-row { display: flex; gap: 8px; margin-bottom: 20px; }
+  .input-row input {
+    flex: 1; padding: 12px 16px;
+    border-radius: 24px; border: 1px solid #2a2a3e;
+    background: #111; color: #ddd; font-size: 0.85rem; outline: none;
+  }
+  .input-row input:focus { border-color: #c9a96e; }
+  .send-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, #c9a96e, #a8885a);
+    border: none; color: #fff; font-size: 1.1rem; cursor: pointer;
+  }
+
+  .copy-card {
+    background: #16213e; border-radius: 16px; padding: 16px;
+    margin-bottom: 10px; border-left: 3px solid #c9a96e;
+    position: relative;
+  }
+  .copy-card .text { font-size: 0.9rem; color: #ddd; line-height: 1.7; margin-bottom: 8px; }
+  .copy-card .meta { display: flex; gap: 12px; }
+  .copy-card .tag {
+    font-size: 0.65rem; padding: 3px 10px;
+    border-radius: 10px; background: rgba(201,169,110,0.15); color: #c9a96e;
+  }
+  .copy-card .copy-btn {
+    position: absolute; right: 14px; bottom: 14px;
+    font-size: 0.7rem; color: #888; cursor: pointer; background: none; border: none;
+  }
+
+  /* ===== 树洞模式 ===== */
+  .treehole-intro {
+    text-align: center; padding: 30px 10px 20px;
+    color: #666; font-size: 0.8rem; line-height: 1.8;
+  }
+  .treehole-intro .big-emoji { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+  .tree-messages { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+
+  .tree-msg { max-width: 85%; padding: 14px 16px; border-radius: 18px; font-size: 0.85rem; line-height: 1.6; }
+  .tree-msg.mine {
+    align-self: flex-end; background: #2a2a3e;
+    color: #ccc; border-bottom-right-radius: 6px;
+  }
+  .tree-msg.reply {
+    align-self: flex-start; background: #1a1a1a;
+    color: #bbb; border-bottom-left-radius: 6px; border: 1px solid #222;
+  }
+  .tree-msg .sender { font-size: 0.7rem; color: #666; margin-bottom: 4px; }
+
+  .tree-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .tree-input-row textarea {
+    flex: 1; padding: 12px 16px; border-radius: 20px;
+    border: 1px solid #2a2a3e; background: #111; color: #ddd;
+    font-size: 0.85rem; outline: none; resize: none; height: 44px;
+    font-family: inherit;
+  }
+  .tree-input-row textarea:focus { border-color: #7eb8a0; }
+  .tree-send {
+    width: 44px; height: 44px; border-radius: 50%; align-self: flex-end;
+    background: linear-gradient(135deg, #5a8f7b, #3d6b5a);
+    border: none; color: #fff; font-size: 1.1rem; cursor: pointer;
+  }
+
+  .badge-anon {
+    font-size: 0.6rem; padding: 3px 10px;
+    border-radius: 10px; background: rgba(90,143,123,0.2); color: #7eb8a0;
+    display: inline-block; margin-bottom: 8px;
+  }
+
+  /* 底部 */
+  .bottombar {
+    padding: 10px 20px; border-top: 1px solid #1f1f35;
+    display: flex; justify-content: space-around;
+  }
+  .nav-icon { font-size: 1.2rem; color: #555; cursor: pointer; }
+  .nav-icon.here { color: #c9a96e; }
+
+  /* 标签 */
+  .mock-label {
+    position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,255,255,0.06); color: #777;
+    font-size: 0.7rem; padding: 4px 14px; border-radius: 10px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<div style="position:relative;">
+  <span class="mock-label">📱 设计样图 — 确认风格后我再写真实代码</span>
+  <div class="phone">
+    <!-- 顶栏 -->
+    <div class="topbar">
+      <span class="logo">轻 言</span>
+      <div class="top-actions">
+        <span class="top-btn">⚙️</span>
+      </div>
+    </div>
+
+    <!-- Tab -->
+    <div class="tabs">
+      <div class="tab active">✍️ 文案</div>
+      <div class="tab">🌲 树洞</div>
+    </div>
+
+    <div class="content" id="content">
+
+      <!-- ===== 文案模式 ===== -->
+      <div class="copy-scene">
+        <span class="scene-chip on">全部</span>
+        <span class="scene-chip">美食</span>
+        <span class="scene-chip">日常</span>
+        <span class="scene-chip">深夜</span>
+        <span class="scene-chip">旅行</span>
+        <span class="scene-chip">治愈</span>
+        <span class="scene-chip">搞钱</span>
+      </div>
+
+      <div class="input-row">
+        <input type="text" placeholder="输入心情关键词，比如：下雨天 + 咖啡">
+        <button class="send-btn">✨</button>
+      </div>
+
+      <!-- 生成的文案卡片 -->
+      <div class="copy-card">
+        <div class="text">下雨天最适合做的事，就是端着咖啡看窗外假装自己很忧郁，其实心里在想：这雨要是下一整天就好了，今天正好不想出门。</div>
+        <div class="meta">
+          <span class="tag">日常</span>
+          <span class="tag" style="background:rgba(130,150,200,0.15);color:#8899cc;">随性</span>
+        </div>
+        <button class="copy-btn">📋 复制</button>
+      </div>
+
+      <div class="copy-card" style="border-left-color:#8ab4d8;">
+        <div class="text">咖啡是成年人的合法兴奋剂。下雨是成年人的合法请假条。今天两样凑齐了。</div>
+        <div class="meta">
+          <span class="tag">日常</span>
+          <span class="tag" style="background:rgba(130,150,200,0.15);color:#8899cc;">俏皮</span>
+        </div>
+        <button class="copy-btn">📋 复制</button>
+      </div>
+
+      <div class="copy-card" style="border-left-color:#d4a0a0;">
+        <div class="text">有些日子不需要什么特别的事。一杯热咖啡，一场雨，一个人安静待着，就已经是生活最好的部分了。</div>
+        <div class="meta">
+          <span class="tag">治愈</span>
+          <span class="tag" style="background:rgba(200,150,150,0.15);color:#d4a0a0;">温柔</span>
+        </div>
+        <button class="copy-btn">📋 复制</button>
+      </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="bottombar">
+      <span class="nav-icon here">✍️</span>
+      <span class="nav-icon">🌲</span>
+      <span class="nav-icon">❤️</span>
+    </div>
+  </div>
+</div>
+
+<!-- 树洞模式 phone (并排展示) -->
+<div style="position:relative; margin-left: 40px;">
+  <span class="mock-label">🌲 树洞模式 — 点击上方Tab切换</span>
+  <div class="phone">
+    <div class="topbar">
+      <span class="logo">轻 言</span>
+      <div class="top-actions">
+        <span class="top-btn">⚙️</span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab">✍️ 文案</div>
+      <div class="tab active">🌲 树洞</div>
+    </div>
+
+    <div class="content">
+      <div class="treehole-intro">
+        <span class="big-emoji">🌲</span>
+        这里是你的树洞<br>
+        说什么都行，没人知道你是谁<br>
+        每一条都会被温柔接住
+      </div>
+
+      <div class="tree-messages">
+        <div class="tree-msg mine">
+          <div class="sender">🫧 匿名</div>
+          今天被老板说了，其实不是我的错，但不想解释。觉得很委屈，又觉得自己小题大做。
+        </div>
+        <div class="tree-msg reply">
+          <div class="sender">🌲 轻言</div>
+          委屈就是委屈，不用给自己贴"小题大做"的标签。被误解的时候不想解释，可能是累了，也可能是觉得不值得——这都没错。你的感受是真实的，先接纳它。🍃
+        </div>
+
+        <div class="tree-msg mine">
+          <div class="sender">🫧 匿名</div>
+          谢谢你……其实我也知道没什么大不了的，就是当时心里堵得慌。
+        </div>
+        <div class="tree-msg reply">
+          <div class="sender">🌲 轻言</div>
+          堵的时候就让它堵一会儿，不用急着通。有些情绪来就是为了被看见，而不是被解决。你今天已经很棒了。🕯️
+        </div>
+      </div>
+
+      <div class="tree-input-row">
+        <textarea placeholder="在这里放下你想说的话..."></textarea>
+        <button class="tree-send">↑</button>
+      </div>
+      <span class="badge-anon">🔒 完全匿名 · 不上传服务器</span>
+    </div>
+
+    <div class="bottombar">
+      <span class="nav-icon">✍️</span>
+      <span class="nav-icon here">🌲</span>
+      <span class="nav-icon">❤️</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 纯静态样图，无需交互逻辑——仅用于设计确认
+</script>
+
+</body>
+</html>
