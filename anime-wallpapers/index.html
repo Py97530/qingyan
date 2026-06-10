@@ -6,6 +6,25 @@
 <title>宫崎骏风原创插画壁纸 · 10张治愈系手机壁纸</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── 防截屏录屏 ── */
+img{
+  -webkit-user-drag:none;user-drag:none;
+  -webkit-touch-callout:none;
+}
+.protected{
+  position:relative;
+}
+.protected::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 41px);
+  pointer-events:none;z-index:1;
+}
+.no-select{
+  -webkit-user-select:none;user-select:none;
+}
+
 body{
   font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
   background:#0d1b2a;color:#c8dce8;line-height:1.7;min-height:100vh;
@@ -171,7 +190,7 @@ body{
 .footer a{color:#6a8a9a;text-decoration:none}
 </style>
 </head>
-<body>
+<body class="no-select">
 <div class="container">
 
   <!-- Hero -->
@@ -180,6 +199,8 @@ body{
     <p class="sub">10张治愈系手机壁纸 · 原创插画 · 760×1280</p>
     <span class="badge">🔒 赞赏后解锁下载</span>
   </div>
+
+  <div id="blurWarn" style="display:none;text-align:center;font-size:0.7rem;color:#c06a6a;background:#1a1010;border:1px solid #4a2020;border-radius:8px;padding:6px 12px;margin:0 0 14px">⚠️ 检测到截屏/录屏行为 · 原创作品受保护</div>
 
   <p style="text-align:center;font-size:0.7rem;color:#6a8a8a;margin:0 0 14px">👆 当前为预览画质 · 点图片查看高清原图</p>
 
@@ -274,6 +295,29 @@ body{
 </div>
 
 <script>
+// ═══ 防截屏录屏 ═══
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+document.addEventListener('keydown', function(e){
+  // 屏蔽 Ctrl+S / Ctrl+P / Ctrl+Shift+I / F12 / PrintScreen
+  if(e.ctrlKey && (e.key==='s'||e.key==='S'||e.key==='p'||e.key==='P'||e.key==='u'||e.key==='U')) e.preventDefault();
+  if(e.ctrlKey && e.shiftKey && (e.key==='i'||e.key==='I'||e.key==='c'||e.key==='C')) e.preventDefault();
+  if(e.key==='F12'||e.key==='PrintScreen') e.preventDefault();
+});
+// 检测页面失焦(可能截屏/录屏)
+var blurCount = 0;
+window.addEventListener('blur', function(){ blurCount++; });
+window.addEventListener('focus', function(){
+  if(blurCount > 0){
+    var el = document.getElementById('blurWarn');
+    if(el){ el.style.display='block'; setTimeout(function(){ el.style.display='none'; }, 3000); }
+  }
+});
+// 移动端检测
+document.addEventListener('visibilitychange', function(){
+  if(document.hidden){ blurCount++; }
+});
+
 // ═══ 配置 ═══
 var UNLOCK_PASSWORD = 'shmily543125';  // 改成你想要的密码
 
@@ -301,7 +345,7 @@ function renderPage(pg){
         var card = document.createElement('div');
         card.className = 'wall-card';
         card.innerHTML =
-          '<div onclick="openLightbox('+idx+')"><img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="200" height="356"></div>'+
+          '<div onclick="openLightbox('+idx+')" class="protected"><img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="200" height="356"></div>'+
           '<div class="label">'+labels[idx]+'</div>'+
           '<button class="buy-one" onclick="event.stopPropagation();buySingle('+idx+')">¥2 单买</button>';
         grid.appendChild(card);
