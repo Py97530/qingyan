@@ -18,28 +18,25 @@ body{
 .hero .sub{font-size:0.82rem;color:#8899aa}
 .badge{display:inline-block;background:#1b3a5c;color:#8ab8d8;padding:4px 14px;border-radius:20px;font-size:0.75rem;margin-top:10px}
 
-/* ── 横屏画廊：单列大卡片 ── */
+/* ── 横屏画廊 ── */
 .gallery-wrap{position:relative;margin:0 0 24px}
-.wall-list{
-  display:flex;flex-direction:column;gap:14px;
-  transition:opacity .25s;
-}
+.wall-list{display:flex;flex-direction:column;gap:14px;transition:opacity .25s}
 .wall-list.fading{opacity:0.3}
 
-/* 横屏卡片 */
 .wall-card{
   background:#0f2035;border-radius:14px;overflow:hidden;
-  border:1px solid #162d45;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;
+  border:1px solid #162d45;transition:transform .2s,box-shadow .2s;position:relative;
 }
 .wall-card:active{transform:scale(0.98)}
-.wall-card img{
-  width:100%;display:block;aspect-ratio:16/9;object-fit:cover;
+.wall-card img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;cursor:pointer}
+.wall-card .label{padding:8px 12px 4px;text-align:center;font-size:0.78rem;color:#a0bcd0}
+.wall-card .buy-one{
+  display:block;width:100%;padding:4px 0 8px;text-align:center;
+  font-size:0.7rem;color:#c8a060;cursor:pointer;
+  background:none;border:none;font-family:inherit;
+  transition:color .2s;
 }
-.wall-card .label{
-  padding:8px 12px;text-align:center;
-  font-size:0.78rem;color:#a0bcd0;
-}
+.wall-card .buy-one:hover{color:#e8c878}
 
 /* 翻页控件 */
 .pager{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
@@ -68,70 +65,77 @@ body{
 .style-note h3{font-size:0.9rem;color:#d8c8a8;margin-bottom:8px}
 .style-note p{font-size:0.75rem;color:#8a9ab0;line-height:1.6}
 
-/* 卖点 */
-.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 24px}
-.feat{background:#0f2035;border-radius:14px;padding:18px 14px;text-align:center}
-.feat .icon{font-size:1.8rem;margin-bottom:8px}
-.feat h3{font-size:0.85rem;color:#d8e0e8;margin-bottom:4px}
-.feat p{font-size:0.7rem;color:#7a9aaa}
+/* ── 购买区 ── */
+.buy-section{margin:0 0 24px}
 
-/* 价格 */
 .price-card{
   background:linear-gradient(135deg,#0f2538,#152d42);
   border:1.5px solid #2a4a6a;
-  border-radius:20px;padding:28px 20px;text-align:center;margin:0 0 24px;
+  border-radius:20px;padding:28px 20px;text-align:center;margin:0 0 12px;
 }
 .price-card .yuan{font-size:0.8rem;color:#8899aa}
 .price-card .num{font-size:3rem;font-weight:700;color:#e8d8b8;line-height:1}
-.price-card .what{font-size:0.8rem;color:#7a9aaa;margin:6px 0 0}
 .price-card .strike{text-decoration:line-through;color:#4a6a7a;font-size:0.9rem;margin-left:6px}
 .price-card .sale-tag{display:inline-block;background:#c04040;color:#fff;font-size:0.7rem;padding:2px 10px;border-radius:10px;margin-left:8px;vertical-align:middle}
+.price-card .what{font-size:0.8rem;color:#7a9aaa;margin:6px 0 0}
 
-/* 按钮 */
+.also-single{text-align:center;font-size:0.75rem;color:#7a9aaa;margin:0 0 16px}
+.also-single span{color:#c8a060}
+
+/* ── 赞赏解锁区 ── */
+.unlock-box{
+  background:#0a1620;border:1.5px solid #1a3a5a;border-radius:16px;
+  padding:20px 18px;margin:0 0 20px;text-align:center;
+}
+.unlock-box .t{color:#d8e8f0;font-weight:600;font-size:0.88rem;margin-bottom:6px}
+.unlock-box .steps{font-size:0.72rem;color:#7a9aaa;line-height:2;margin-bottom:14px}
+.unlock-box .steps .hi{color:#e8c878;font-weight:600}
+
+.qr-placeholder{
+  width:160px;height:160px;margin:0 auto 12px;
+  background:#1a2840;border:2px dashed #2a4a6a;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;color:#4a6a7a;flex-direction:column;
+}
+.qr-img{max-width:160px;border-radius:12px;margin:0 auto 12px;display:block}
+
+.pw-row{display:flex;gap:8px;max-width:300px;margin:0 auto}
+.pw-row input{
+  flex:1;padding:10px 14px;border-radius:10px;
+  border:1.5px solid #2a4a6a;background:#0f2030;color:#d8e8f0;
+  font-size:0.85rem;outline:none;text-align:center;font-family:inherit;
+  letter-spacing:2px;
+}
+.pw-row input:focus{border-color:#5a8aaa}
+.pw-row input::placeholder{color:#4a6a7a;letter-spacing:0}
+.pw-row button{
+  padding:10px 18px;border-radius:10px;
+  background:linear-gradient(135deg,#5a8aaa,#3a6a8a);
+  color:#fff;border:none;font-size:0.85rem;cursor:pointer;font-family:inherit;
+  white-space:nowrap;transition:all .15s;
+}
+.pw-row button:active{transform:scale(.95)}
+.pw-wrong{color:#c06a6a;font-size:0.7rem;margin-top:8px;display:none}
+
+.dl-btns{display:none;margin-top:16px}
+.dl-btns.show{display:block}
 .btn{
   display:block;width:100%;padding:16px;border-radius:16px;
   font-size:1rem;font-weight:600;text-align:center;cursor:pointer;
   border:none;transition:transform .15s,box-shadow .15s;
-  text-decoration:none;color:#fff;
+  text-decoration:none;color:#fff;font-family:inherit;
 }
 .btn:active{transform:scale(0.97)}
-.btn-buy{
+.btn-dl{
   background:linear-gradient(135deg,#5a8aaa,#3a6a8a);
   color:#fff;box-shadow:0 4px 20px rgba(58,106,138,.35);
-  margin:0 0 12px;
+  margin:0 0 10px;
 }
-.btn-buy:hover{box-shadow:0 6px 28px rgba(58,106,138,.5)}
+.btn-dl:hover{box-shadow:0 6px 28px rgba(58,106,138,.5)}
 .btn-preview{
   background:#0f2030;color:#a8c0d0;border:1px solid #2a4a6a;
-  margin:0 0 24px;
 }
-
-/* 下载指南 */
-.dl-guide{
-  background:#0a1620;border-radius:14px;padding:20px 18px;
-  margin:0 0 24px;font-size:0.78rem;color:#7a9aaa;line-height:1.8;
-}
-.dl-guide .t{color:#d8e8f0;font-weight:600;margin-bottom:8px}
-.dl-guide .step{display:flex;gap:8px;margin-bottom:6px}
-.dl-guide .step-num{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#1b3a5c;color:#8ab8d8;font-size:0.65rem;display:flex;align-items:center;justify-content:center}
-
-/* 信任区 */
-.trust{
-  background:#0a1620;border-radius:14px;padding:20px 18px;
-  margin:0 0 24px;font-size:0.78rem;color:#7a9aaa;line-height:1.8;
-}
-.trust .t{color:#d8e8f0;font-weight:600;margin-bottom:6px}
-
-/* FAQ */
-.faq{margin:0 0 40px}
-.faq h2{font-size:1rem;color:#8ab8d8;margin-bottom:12px}
-.faq-item{background:#0f2035;border-radius:12px;padding:14px 16px;margin-bottom:8px}
-.faq-item .q{font-size:0.85rem;color:#d8e0e8;margin-bottom:4px}
-.faq-item .a{font-size:0.75rem;color:#7a9aaa}
-
-/* 底部 */
-.footer{text-align:center;font-size:0.7rem;color:#4a6a7a;padding:20px 0}
-.footer a{color:#6a8a9a;text-decoration:none}
+.dl-note{text-align:center;font-size:0.7rem;color:#5a8a6a;margin-top:12px}
 
 /* 弹窗 */
 .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.94);z-index:999;flex-direction:column;align-items:center;justify-content:center}
@@ -140,19 +144,27 @@ body{
 .lightbox .close{color:#fff;margin-top:20px;font-size:0.9rem;cursor:pointer;padding:10px 30px;background:#1a2a40;border-radius:20px;border:none}
 .lightbox .nav{display:flex;gap:20px;margin-top:16px}
 .lightbox .nav button{background:#1a2a40;color:#fff;border:none;padding:10px 20px;border-radius:20px;cursor:pointer;font-size:0.85rem}
+
+/* FAQ */
+.faq{margin:0 0 40px}
+.faq h2{font-size:1rem;color:#8ab8d8;margin-bottom:12px}
+.faq-item{background:#0f2035;border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.faq-item .q{font-size:0.85rem;color:#d8e0e8;margin-bottom:4px}
+.faq-item .a{font-size:0.75rem;color:#7a9aaa}
+.footer{text-align:center;font-size:0.7rem;color:#4a6a7a;padding:20px 0}
+.footer a{color:#6a8a9a;text-decoration:none}
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Hero -->
   <div class="hero">
     <h1>🖥️ 精选横屏高清壁纸</h1>
     <p class="sub">10张精选桌面壁纸 · 原创插画 · 2282×1280</p>
-    <span class="badge">🔥 限时促销 · 立省¥22.5</span>
+    <span class="badge">🔒 赞赏后解锁下载</span>
   </div>
 
-  <!-- 画廊：每页3张 -->
+  <!-- 画廊 -->
   <div class="gallery-wrap">
     <div class="wall-list" id="wallList"></div>
     <div class="pager">
@@ -160,96 +172,68 @@ body{
       <div class="page-dots" id="pageDots"></div>
       <button id="btnNext" onclick="goPage(1)">下一页 »</button>
     </div>
+    <p style="text-align:center;font-size:0.68rem;color:#4a6a7a;margin-top:8px">👇 点「¥2 单买」可直接下载单张</p>
   </div>
 
-  <!-- 风格说明 -->
   <div class="style-note">
     <h3>🖼️ 风格特点</h3>
-    <p>
-      精选原创插画 · 横屏桌面专属<br>
-      细节丰富 · 色彩动人 · 适配任意电脑<br>
-      每张独一无二，网上绝无同款
-    </p>
+    <p>精选原创插画 · 横屏桌面专属<br>细节丰富 · 色彩动人 · 适配任意电脑</p>
   </div>
 
-  <!-- 卖点 -->
-  <div class="features">
-    <div class="feat">
-      <div class="icon">🖥️</div>
-      <h3>横屏专属</h3>
-      <p>2282×1280，完美桌面</p>
+  <!-- ── 购买区 ── -->
+  <div class="buy-section">
+
+    <div class="price-card">
+      <span class="yuan">¥</span><span class="num">7.5</span><span class="strike">¥30</span><span class="sale-tag">-75%</span>
+      <p class="what">全部10张打包 · 永久拥有 · 限时特惠</p>
     </div>
-    <div class="feat">
-      <div class="icon">🎨</div>
-      <h3>原创插画</h3>
-      <p>每张独一无二，绝无同款</p>
+
+    <p class="also-single">也可以<span>¥2/张</span>单买，点画廊卡片下方按钮</p>
+
+    <div class="unlock-box">
+      <div class="t">🔐 赞赏后解锁下载</div>
+      <div class="steps">
+        <span class="hi">①</span> 扫码赞赏 ¥7.5（全包）或 ¥2（单张）<br>
+        <span class="hi">②</span> 截图发我微信，秒回解锁密码<br>
+        <span class="hi">③</span> 输入密码，即可下载
+      </div>
+
+      <img class="qr-img" id="qrCode" src="" alt="赞赏码" onerror="this.style.display='none';document.getElementById('qrPlaceholder').style.display='flex'">
+      <div class="qr-placeholder" id="qrPlaceholder">📷<br><span style="font-size:0.6rem;display:block;margin-top:6px">赞赏码</span></div>
+
+      <div class="pw-row">
+        <input type="text" id="pwInput" placeholder="输入解锁密码" maxlength="20">
+        <button onclick="unlock()">解锁</button>
+      </div>
+      <p class="pw-wrong" id="pwWrong">密码错误，请重试</p>
+
+      <div class="dl-btns" id="dlBtns">
+        <button class="btn btn-dl" onclick="downloadPack()">⬇ 下载全部 10 张 (.zip)</button>
+        <button class="btn btn-preview" onclick="downloadFreeSample()">🎁 先免费体验一张</button>
+        <p class="dl-note">✅ 已解锁 · 点击按钮即下载</p>
+      </div>
     </div>
-    <div class="feat">
-      <div class="icon">📱</div>
-      <h3>手机也能用</h3>
-      <p>横屏壁纸适配平板和折叠屏</p>
-    </div>
-    <div class="feat">
-      <div class="icon">💙</div>
-      <h3>支持创作者</h3>
-      <p>你的支持让创作继续</p>
-    </div>
+
   </div>
 
-  <!-- 价格 -->
-  <div class="price-card">
-    <span class="yuan">¥</span><span class="num">7.5</span><span class="strike">¥30</span><span class="sale-tag">-75%</span>
-    <p class="what">10张高清横屏壁纸 · 永久拥有 · 限时特惠</p>
-  </div>
-
-  <!-- 购买按钮 -->
-  <a class="btn btn-buy" id="btnBuy" href="#" target="_blank">
-    🔥 立即购买（10张）
-  </a>
-  <button class="btn btn-preview" onclick="downloadFreeSample()">
-    🎁 免费下载一张体验
-  </button>
-
-  <!-- 下载指南 -->
-  <div class="dl-guide">
-    <div class="t">📥 购买后如何使用</div>
-    <div class="step"><span class="step-num">1</span> 付款后点击下载链接，获得 .zip 压缩包</div>
-    <div class="step"><span class="step-num">2</span> 💻 电脑：解压到桌面 → 右键设为桌面背景</div>
-    <div class="step"><span class="step-num">3</span> 📱 手机：解压后长按照片 → 保存到相册 → 设为壁纸</div>
-  </div>
-
-  <!-- 信任区 -->
-  <div class="trust">
-    <div class="t">🛡️ 承诺</div>
-    • 原创插画，每张图独一无二，网上搜不到同款<br>
-    • 图片不含任何水印、广告、第三方链接<br>
-    • 下载 .zip 解压即用，手机电脑都方便<br>
-    • 不满意可联系我，包解决
-  </div>
-
-  <!-- FAQ -->
   <div class="faq">
     <h2>💬 可能想问</h2>
     <div class="faq-item">
       <div class="q">和宫崎骏风壁纸有什么区别？</div>
-      <div class="a">这是横屏桌面壁纸系列，适合电脑和平板使用。宫崎骏风是竖屏手机壁纸。</div>
+      <div class="a">这是横屏桌面壁纸系列，适合电脑和平板。宫崎骏风是竖屏手机壁纸。</div>
     </div>
     <div class="faq-item">
-      <div class="q">购买后怎么下载？</div>
-      <div class="a">付款后自动发送下载链接，下载 .zip 文件，解压就能用。</div>
+      <div class="q">怎么获得密码？</div>
+      <div class="a">扫码赞赏 ¥7.5（或 ¥2 单买），截图发我微信，我秒回密码给你。</div>
     </div>
     <div class="faq-item">
       <div class="q">图片清晰吗？</div>
-      <div class="a">2282×1280 高清 JPG，细节丰富，普通屏幕清晰无比。</div>
-    </div>
-    <div class="faq-item">
-      <div class="q">以后还有新图吗？</div>
-      <div class="a">会持续更新！买过的用户可享后续新品折扣。</div>
+      <div class="a">2282×1280 高清 JPG，细节丰富。</div>
     </div>
   </div>
 
   <p class="footer">
-    © 轻言壁纸 · 原创插画内容 · 合法售卖<br>
+    © 轻言壁纸 · 原创插画内容<br>
     Powered by <a href="https://py97530.github.io/qingyan/">轻言</a>
   </p>
 </div>
@@ -265,23 +249,18 @@ body{
 </div>
 
 <script>
-var names = [
-  '01','02','03','04','05',
-  '06','07','08','09','10'
-];
+// ═══ 配置 ═══
+var UNLOCK_PASSWORD = 'shmily520';
+
+var names = ['01','02','03','04','05','06','07','08','09','10'];
 var labels = [
   '晨曦微光','山海远阔','静谧湖畔','云端之上','暮色黄昏',
   '星河万里','绿野仙踪','金色时光','水墨江南','极光之夜'
 ];
-var totalPages = 4;
-var perPage = 3;
-var currentPage = 0;
-var currentIdx = 0;
+var totalPages = Math.ceil(names.length / 3), perPage = 3, currentPage = 0, currentIdx = 0;
+var unlocked = false;
 
-// 计算总页数
-totalPages = Math.ceil(names.length / perPage);
-
-// 渲染当前页
+// ═══ 画廊 ═══
 function renderPage(pg){
   var list = document.getElementById('wallList');
   list.classList.add('fading');
@@ -293,28 +272,23 @@ function renderPage(pg){
       (function(idx){
         var card = document.createElement('div');
         card.className = 'wall-card';
-        card.onclick = function(){ openLightbox(idx); };
-        card.innerHTML = '<img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="400" height="225"><div class="label">'+labels[idx]+'</div>';
+        card.innerHTML =
+          '<div onclick="openLightbox('+idx+')"><img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="400" height="225"></div>'+
+          '<div class="label">'+labels[idx]+'</div>'+
+          '<button class="buy-one" onclick="event.stopPropagation();buySingle('+idx+')">¥2 单买</button>';
         list.appendChild(card);
       })(i);
     }
     list.classList.remove('fading');
   }, 150);
-
-  // 更新按钮
   document.getElementById('btnPrev').disabled = pg === 0;
   document.getElementById('btnNext').disabled = pg === totalPages - 1;
-
-  // 更新圆点
   var dots = document.getElementById('pageDots').children;
-  for(var j = 0; j < dots.length; j++){
-    dots[j].className = j === pg ? 'dot on' : 'dot';
-  }
+  for(var j = 0; j < dots.length; j++) dots[j].className = j === pg ? 'dot on' : 'dot';
   currentPage = pg;
 }
 
-// 生成翻页圆点
-(function(){
+(function init(){
   var dots = document.getElementById('pageDots');
   for(var i = 0; i < totalPages; i++){
     (function(pg){
@@ -328,12 +302,9 @@ function renderPage(pg){
 })();
 
 function goPage(dir){ goPageTo(currentPage + dir); }
-function goPageTo(pg){
-  if(pg < 0 || pg >= totalPages || pg === currentPage) return;
-  renderPage(pg);
-}
+function goPageTo(pg){ if(pg >= 0 && pg < totalPages && pg !== currentPage) renderPage(pg); }
 
-// 弹窗
+// ═══ 弹窗 ═══
 function openLightbox(idx){
   currentIdx = idx;
   document.getElementById('lbImg').src = names[idx] + '.jpg';
@@ -343,14 +314,8 @@ function closeLightbox(e){
   if(e && e.target !== document.getElementById('lightbox')) return;
   document.getElementById('lightbox').classList.remove('show');
 }
-function prevImg(){
-  currentIdx = (currentIdx - 1 + names.length) % names.length;
-  document.getElementById('lbImg').src = names[currentIdx] + '.jpg';
-}
-function nextImg(){
-  currentIdx = (currentIdx + 1) % names.length;
-  document.getElementById('lbImg').src = names[currentIdx] + '.jpg';
-}
+function prevImg(){ currentIdx = (currentIdx - 1 + names.length) % names.length; document.getElementById('lbImg').src = names[currentIdx] + '.jpg'; }
+function nextImg(){ currentIdx = (currentIdx + 1) % names.length; document.getElementById('lbImg').src = names[currentIdx] + '.jpg'; }
 document.addEventListener('keydown', function(e){
   if(!document.getElementById('lightbox').classList.contains('show')) return;
   if(e.key==='ArrowLeft') prevImg();
@@ -358,7 +323,37 @@ document.addEventListener('keydown', function(e){
   if(e.key==='Escape') closeLightbox();
 });
 
-// 免费体验
+// ═══ 解锁 ═══
+function unlock(){
+  var pw = document.getElementById('pwInput').value.trim();
+  if(pw === UNLOCK_PASSWORD){
+    unlocked = true;
+    document.getElementById('dlBtns').classList.add('show');
+    document.getElementById('pwWrong').style.display = 'none';
+    document.getElementById('pwInput').style.borderColor = '#5a8a5a';
+  } else {
+    document.getElementById('pwWrong').style.display = 'block';
+    document.getElementById('pwInput').style.borderColor = '#c06a6a';
+  }
+}
+
+// ═══ 下载 ═══
+function downloadPack(){
+  if(!unlocked) return;
+  var a = document.createElement('a');
+  a.href = '轻言横屏壁纸_10张.zip';
+  a.download = '轻言横屏壁纸_10张.zip';
+  a.click();
+}
+
+function buySingle(idx){
+  if(!unlocked){ alert('请先在下方输入解锁密码\n\n赞赏 ¥2 截图发微信获取密码'); return; }
+  var a = document.createElement('a');
+  a.href = names[idx] + '.jpg';
+  a.download = '轻言横屏壁纸_'+labels[idx]+'.jpg';
+  a.click();
+}
+
 function downloadFreeSample(){
   var a = document.createElement('a');
   a.href = '01.jpg';
