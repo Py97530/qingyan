@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>宫崎骏风动漫壁纸 · 2张治愈系手机壁纸</title>
+<title>宫崎骏风AI原创壁纸 · 10张治愈系手机壁纸</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -13,26 +13,53 @@ body{
 .container{max-width:480px;margin:0 auto;padding:24px 20px 60px}
 
 /* Hero */
-.hero{text-align:center;padding:40px 0 32px}
-.hero h1{font-size:1.5rem;color:#e8e0d0;margin-bottom:8px}
-.hero .sub{font-size:0.85rem;color:#8899aa}
-.badge{display:inline-block;background:#1b3a5c;color:#8ab8d8;padding:4px 14px;border-radius:20px;font-size:0.75rem;margin-top:12px}
+.hero{text-align:center;padding:40px 0 24px}
+.hero h1{font-size:1.4rem;color:#e8e0d0;margin-bottom:6px}
+.hero .sub{font-size:0.82rem;color:#8899aa}
+.badge{display:inline-block;background:#1b3a5c;color:#8ab8d8;padding:4px 14px;border-radius:20px;font-size:0.75rem;margin-top:10px}
 
-/* 预览区 */
-.preview-box{position:relative;margin:0 0 32px}
-.preview-box img{width:100%;border-radius:16px;display:block}
-.preview-box .swipe-hint{text-align:center;font-size:0.75rem;color:#6a8899;margin-top:10px}
+/* 页面分隔 */
+.page-section{margin:0 0 28px}
+.page-header{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  padding-bottom:10px;border-bottom:1px solid #1a3050;
+}
+.page-header .page-num{
+  background:#1b3a5c;color:#8ab8d8;font-size:0.7rem;
+  padding:3px 12px;border-radius:12px;white-space:nowrap;
+}
+.page-header .page-title{font-size:0.82rem;color:#a0bcd0;font-weight:500}
 
-/* 横向滚动 */
-.scroll-row{display:flex;gap:12px;overflow-x:auto;padding:0 0 16px;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
-.scroll-row::-webkit-scrollbar{height:4px}
-.scroll-row::-webkit-scrollbar-thumb{background:#2a4a6a;border-radius:4px}
-.scroll-card{flex:0 0 120px;scroll-snap-align:start;text-align:center}
-.scroll-card img{width:120px;height:213px;object-fit:cover;border-radius:12px;display:block;border:1px solid #1a3a5a}
-.scroll-card span{display:block;font-size:0.7rem;color:#7a9aaa;margin-top:6px}
+/* 壁纸卡片网格 — 2列 */
+.wall-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* 卡片 */
+.wall-card{
+  background:#0f2035;border-radius:14px;overflow:hidden;
+  border:1px solid #162d45;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.wall-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.wall-card:active{transform:scale(0.97)}
+.wall-card img{
+  width:100%;display:block;aspect-ratio:9/16;object-fit:cover;
+}
+.wall-card .label{
+  padding:8px 10px;text-align:center;
+  font-size:0.75rem;color:#a0bcd0;
+}
+
+/* 风格说明 */
+.style-note{
+  background:linear-gradient(135deg,#1a2840,#1e3050);
+  border:1px solid #2a4060;border-radius:16px;
+  padding:20px 18px;margin:0 0 28px;text-align:center;
+}
+.style-note h3{font-size:0.9rem;color:#d8c8a8;margin-bottom:8px}
+.style-note p{font-size:0.75rem;color:#8a9ab0;line-height:1.6}
 
 /* 卖点 */
-.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 32px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 28px}
 .feat{background:#0f2035;border-radius:14px;padding:18px 14px;text-align:center}
 .feat .icon{font-size:1.8rem;margin-bottom:8px}
 .feat h3{font-size:0.85rem;color:#d8e0e8;margin-bottom:4px}
@@ -42,7 +69,7 @@ body{
 .price-card{
   background:linear-gradient(135deg,#0f2538,#152d42);
   border:1.5px solid #2a4a6a;
-  border-radius:20px;padding:28px 20px;text-align:center;margin:0 0 32px;
+  border-radius:20px;padding:28px 20px;text-align:center;margin:0 0 28px;
 }
 .price-card .yuan{font-size:0.8rem;color:#8899aa}
 .price-card .num{font-size:3rem;font-weight:700;color:#e8d8b8;line-height:1}
@@ -65,13 +92,13 @@ body{
 .btn-buy:hover{box-shadow:0 6px 28px rgba(58,106,138,.5)}
 .btn-preview{
   background:#0f2030;color:#a8c0d0;border:1px solid #2a4a6a;
-  margin:0 0 32px;
+  margin:0 0 28px;
 }
 
 /* 信任区 */
 .trust{
   background:#0a1620;border-radius:14px;padding:20px 18px;
-  margin:0 0 32px;font-size:0.78rem;color:#7a9aaa;line-height:1.8;
+  margin:0 0 28px;font-size:0.78rem;color:#7a9aaa;line-height:1.8;
 }
 .trust .t{color:#d8e8f0;font-weight:600;margin-bottom:6px}
 
@@ -81,15 +108,6 @@ body{
 .faq-item{background:#0f2035;border-radius:12px;padding:14px 16px;margin-bottom:8px}
 .faq-item .q{font-size:0.85rem;color:#d8e0e8;margin-bottom:4px}
 .faq-item .a{font-size:0.75rem;color:#7a9aaa}
-
-/* 风格说明 */
-.style-note{
-  background:linear-gradient(135deg,#1a2840,#1e3050);
-  border:1px solid #2a4060;border-radius:16px;
-  padding:20px 18px;margin:0 0 32px;text-align:center;
-}
-.style-note h3{font-size:0.9rem;color:#d8c8a8;margin-bottom:8px}
-.style-note p{font-size:0.75rem;color:#8a9ab0;line-height:1.6}
 
 /* 底部 */
 .footer{text-align:center;font-size:0.7rem;color:#4a6a7a;padding:20px 0}
@@ -102,6 +120,9 @@ body{
 .lightbox .close{color:#fff;margin-top:20px;font-size:0.9rem;cursor:pointer;padding:10px 30px;background:#1a2a40;border-radius:20px;border:none}
 .lightbox .nav{display:flex;gap:20px;margin-top:16px}
 .lightbox .nav button{background:#1a2a40;color:#fff;border:none;padding:10px 20px;border-radius:20px;cursor:pointer;font-size:0.85rem}
+
+/* 页脚分隔 */
+.page-divider{text-align:center;margin:8px 0 20px;font-size:0.7rem;color:#2a4a6a;letter-spacing:4px}
 </style>
 </head>
 <body>
@@ -109,28 +130,39 @@ body{
 
   <!-- Hero -->
   <div class="hero">
-    <h1>🎬 宫崎骏风 · 动漫壁纸</h1>
-    <p class="sub">2张治愈系手机壁纸 · AI 手绘风 · 1280×2282</p>
+    <h1>🎬 宫崎骏风 · AI原创壁纸</h1>
+    <p class="sub">10张治愈系手机壁纸 · AI 原创 · 760×1280</p>
     <span class="badge">🔒 购买后即时下载</span>
   </div>
 
-  <!-- 主预览 -->
-  <div class="preview-box">
-    <img src="preview.jpg" alt="壁纸预览" id="mainPreview" style="cursor:pointer" onclick="openLightbox(0)">
-    <p class="swipe-hint">👆 点击查看大图  |  👈 左右滑动浏览</p>
+  <!-- 第1页：5张 -->
+  <div class="page-section" id="page1">
+    <div class="page-header">
+      <span class="page-num">第 1 页</span>
+      <span class="page-title">天空·森林·油屋·海边·花海</span>
+    </div>
+    <div class="wall-grid" id="grid1"></div>
   </div>
 
-  <!-- 横向滚动 -->
-  <div class="scroll-row" id="scrollRow"></div>
+  <div class="page-divider">◆ ◆ ◆</div>
+
+  <!-- 第2页：5张 -->
+  <div class="page-section" id="page2">
+    <div class="page-header">
+      <span class="page-num">第 2 页</span>
+      <span class="page-title">城堡·列车·飞行·竹林·鲤鱼旗</span>
+    </div>
+    <div class="wall-grid" id="grid2"></div>
+  </div>
 
   <!-- 风格说明 -->
   <div class="style-note">
     <h3>🎨 风格特点</h3>
     <p>
-      动漫插画风格 · 色彩鲜艳饱和度高<br>
+      AI 原创生成 · 宫崎骏动漫美学<br>
       油画般细腻笔触 · 细节清晰<br>
-      高分辨率 · 神秘治愈氛围<br>
-      宫崎骏式温暖光影
+      高饱和温暖光影 · 治愈氛围<br>
+      每张独一无二，网上绝无同款
     </p>
   </div>
 
@@ -139,17 +171,17 @@ body{
     <div class="feat">
       <div class="icon">🎬</div>
       <h3>宫崎骏风</h3>
-      <p>温暖治愈的动漫美学</p>
+      <p>10大经典场景灵感</p>
     </div>
     <div class="feat">
       <div class="icon">📱</div>
       <h3>完美适配</h3>
-      <p>1280×2282，手机满分</p>
+      <p>760×1280，手机满分</p>
     </div>
     <div class="feat">
-      <div class="icon">🎨</div>
-      <h3>AI 手绘质感</h3>
-      <p>油画笔触，细节丰富</p>
+      <div class="icon">✨</div>
+      <h3>AI 原创</h3>
+      <p>每张独一无二，绝无同款</p>
     </div>
     <div class="feat">
       <div class="icon">💙</div>
@@ -160,13 +192,13 @@ body{
 
   <!-- 价格 -->
   <div class="price-card">
-    <span class="yuan">¥</span><span class="num">3.9</span><span class="strike">¥7.9</span>
-    <p class="what">2张高清壁纸 · 永久拥有 · 半杯奶茶钱</p>
+    <span class="yuan">¥</span><span class="num">6.9</span><span class="strike">¥12.9</span>
+    <p class="what">10张高清壁纸 · 永久拥有 · 一张不到7毛钱</p>
   </div>
 
   <!-- 购买按钮 -->
   <a class="btn btn-buy" id="btnBuy" href="#" target="_blank">
-    🎬 立即购买
+    🎬 立即购买（10张）
   </a>
   <button class="btn btn-preview" onclick="downloadFreeSample()">
     🎁 免费下载一张体验
@@ -175,7 +207,7 @@ body{
   <!-- 信任区 -->
   <div class="trust">
     <div class="t">🛡️ 承诺</div>
-    • AI 生成 + 人工精选，原创数字商品，售卖完全合法<br>
+    • AI 原创生成，每张图独一无二，网上搜不到同款<br>
     • 图片不含任何水印、广告、第三方链接<br>
     • 购买后获得 .zip 压缩包，解压即用<br>
     • 不满意可联系我，包解决
@@ -190,11 +222,11 @@ body{
     </div>
     <div class="faq-item">
       <div class="q">图片清晰吗？</div>
-      <div class="a">1280×2282 高清 JPG，细节丰富，任何手机都清晰。</div>
+      <div class="a">760×1280 高清 JPG，细节丰富，任何手机都清晰。</div>
     </div>
     <div class="faq-item">
-      <div class="q">和 AI 生成有什么区别？</div>
-      <div class="a">就是 AI 精心生成 + 人工挑选的，每一张都是经过反复调优的最佳效果。</div>
+      <div class="q">是 AI 生成的吗？</div>
+      <div class="a">是的，但每张都是原创——AI 从零创作，网上绝无同款。就像画家用画笔，我用 AI 做笔。</div>
     </div>
     <div class="faq-item">
       <div class="q">以后还有新图吗？</div>
@@ -219,16 +251,27 @@ body{
 </div>
 
 <script>
-var names = ['01-水镜列车','02-云海倒影'];
+var names = [
+  '01-ghibli','02-ghibli','03-ghibli','04-ghibli','05-ghibli',
+  '06-ghibli','07-ghibli','08-ghibli','09-ghibli','10-ghibli'
+];
+var labels = [
+  '云中浮城','巨树森林','温泉油屋','海边小镇','花海山坡',
+  '行走城堡','水中列车','月夜飞行','竹林秘境','鲤鱼旗天'
+];
 var currentIdx = 0;
 
+// 渲染两页网格
 (function(){
-  var row = document.getElementById('scrollRow');
-  names.forEach(function(n, i){
+  var grid1 = document.getElementById('grid1');
+  var grid2 = document.getElementById('grid2');
+  labels.forEach(function(label, i){
     var card = document.createElement('div');
-    card.className = 'scroll-card';
-    card.innerHTML = '<img src="'+n+'.jpg" alt="'+n+'" onclick="openLightbox('+i+')"><span>'+n+'</span>';
-    row.appendChild(card);
+    card.className = 'wall-card';
+    card.onclick = function(){ openLightbox(i); };
+    card.innerHTML = '<img src="'+names[i]+'.jpg" alt="'+label+'" loading="lazy"><div class="label">'+label+'</div>';
+    if(i < 5) grid1.appendChild(card);
+    else grid2.appendChild(card);
   });
 })();
 
@@ -258,8 +301,8 @@ document.addEventListener('keydown', function(e){
 
 function downloadFreeSample(){
   var a = document.createElement('a');
-  a.href = '01-水镜列车.jpg';
-  a.download = '轻言动漫壁纸_免费体验.jpg';
+  a.href = '01-ghibli.jpg';
+  a.download = '轻言AI原创壁纸_免费体验.jpg';
   a.click();
 }
 </script>

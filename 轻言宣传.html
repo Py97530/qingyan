@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>轻言 — 温柔的角落，有人在听</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  :root{
+    --bg:#1c1612;--bg-card:#221b14;--bg-input:#14100c;
+    --border:#2a2018;--border-focus:#b8895a;
+    --text:#c4b8a8;--text-secondary:#b8a590;--text-muted:#9a8872;
+    --accent:#d4a574;--accent-soft:#b8895a;
+    --accent-bg:rgba(184,137,90,0.12);--accent-bg-strong:rgba(184,137,90,0.18);--accent-bg-light:rgba(184,137,90,0.08);
+    --accent-gradient:linear-gradient(135deg,#c49a6c,#a07848);
+  }
+
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
+    font-size:16px;line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  /* ── 氛围光 ── */
+  .ambient{position:fixed;pointer-events:none;z-index:0}
+  .ambient-top{
+    top:0;left:50%;transform:translateX(-50%);
+    width:100%;max-width:600px;height:400px;
+    background:radial-gradient(ellipse at 50% 0%,rgba(184,137,90,0.1),transparent 70%);
+  }
+  .ambient-mid{
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:500px;height:500px;
+    background:radial-gradient(circle,rgba(184,137,90,0.04),transparent 60%);
+  }
+
+  /* ── 容器 ── */
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 20px}
+
+  /* ── 导航 ── */
+  nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(28,22,18,0.75);border-bottom:1px solid var(--border)}
+  nav .nav-inner{max-width:520px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+  .nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:6px;background:linear-gradient(135deg,var(--accent),var(--accent-soft),#d4b896,var(--accent));background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s ease infinite}
+  @keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .nav-cta{
+    padding:8px 18px;border-radius:20px;border:none;
+    background:var(--accent-gradient);color:#fff;
+    font-size:0.78rem;font-weight:600;cursor:pointer;
+    font-family:inherit;letter-spacing:1px;
+    transition:all .2s;text-decoration:none;display:inline-block;
+  }
+  .nav-cta:hover{filter:brightness(1.1);box-shadow:0 2px 12px var(--accent-bg-strong)}
+
+  /* ── Hero ── */
+  .hero{text-align:center;padding:64px 20px 48px}
+  .hero .h-icon{font-size:3.5rem;display:block;margin-bottom:20px;animation:float 3s ease infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero h1{
+    font-size:2rem;font-weight:700;letter-spacing:8px;margin-bottom:12px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-soft),#d4b896,var(--accent));
+    background-size:300% 300%;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shimmer 4s ease infinite;
+  }
+  .hero .tagline{font-size:0.95rem;color:var(--text-secondary);line-height:2;max-width:320px;margin:0 auto 28px}
+  .hero .h-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-hero{
+    padding:12px 28px;border-radius:24px;font-size:0.85rem;font-weight:600;
+    cursor:pointer;font-family:inherit;letter-spacing:1px;
+    transition:all .25s;text-decoration:none;display:inline-block;
+  }
+  .btn-hero.pri{background:var(--accent-gradient);border:none;color:#fff}
+  .btn-hero.pri:hover{filter:brightness(1.1);box-shadow:0 4px 20px var(--accent-bg-strong);transform:translateY(-1px)}
+  .btn-hero.sec{background:none;border:1.5px solid var(--border);color:var(--text-secondary)}
+  .btn-hero.sec:hover{border-color:var(--accent-soft);color:var(--accent);background:var(--accent-bg-light)}
+
+  /* ── 分隔 ── */
+  .divider{display:flex;align-items:center;gap:10px;padding:24px 0;opacity:0.5}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+  .divider span{font-size:0.7rem;color:var(--text-muted);letter-spacing:2px}
+
+  /* ── 功能卡片 ── */
+  .section{padding:36px 0}
+  .section h2{text-align:center;font-size:1.15rem;letter-spacing:3px;margin-bottom:8px;color:var(--text)}
+  .section .s-sub{text-align:center;font-size:0.75rem;color:var(--text-muted);margin-bottom:32px;line-height:1.8}
+
+  .feature{background:var(--bg-card);border-radius:16px;padding:28px;margin-bottom:20px;border:1px solid var(--border);transition:all .3s}
+  .feature:hover{border-color:var(--accent-soft);box-shadow:0 4px 20px var(--accent-bg);transform:translateY(-2px)}
+  .feature .f-icon{font-size:2.2rem;margin-bottom:14px;display:block}
+  .feature h3{font-size:1rem;margin-bottom:8px;color:var(--accent);letter-spacing:2px}
+  .feature p{font-size:0.82rem;color:var(--text-secondary);line-height:1.85}
+
+  /* ── 三步 ── */
+  .steps{display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  .step{display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg-card);border-radius:14px;border:1px solid var(--border)}
+  .step .s-num{width:32px;height:32px;border-radius:50%;background:var(--accent-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0}
+  .step .s-body h4{font-size:0.85rem;color:var(--text);margin-bottom:4px}
+  .step .s-body p{font-size:0.73rem;color:var(--text-secondary)}
+
+  /* ── 引用 ── */
+  blockquote{text-align:center;padding:40px 24px;margin:20px 0}
+  blockquote q{font-size:1rem;color:var(--accent);line-height:2;letter-spacing:2px;font-style:italic}
+  blockquote q::before,blockquote q::after{content:''}
+  blockquote footer{margin-top:12px;font-size:0.7rem;color:var(--text-muted);letter-spacing:1px}
+
+  /* ── 底部 ── */
+  footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);margin-top:20px}
+  footer .f-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  footer .f-links a{color:var(--text-muted);text-decoration:none;font-size:0.75rem;transition:color .2s}
+  footer .f-links a:hover{color:var(--accent)}
+  footer .copy{font-size:0.65rem;color:var(--text-muted);opacity:0.6}
+
+  /* ── 动画 ── */
+  .fade-in{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}
+  .fade-in.d1{animation-delay:.1s}.fade-in.d2{animation-delay:.2s}.fade-in.d3{animation-delay:.3s}.fade-in.d4{animation-delay:.4s}
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+  /* ── 响应式 ── */
+  @media(max-width:400px){
+    .hero h1{font-size:1.6rem;letter-spacing:6px}
+    .hero .h-icon{font-size:2.8rem}
+    .feature{padding:20px}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient ambient-top"></div>
+<div class="ambient ambient-mid"></div>
+
+<!-- ═══ 导航 ═══ -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">轻 言</span>
+    <a class="nav-cta" href="https://py97530.github.io/qingyan/" target="_blank">打开轻言 →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <span class="h-icon">🌲</span>
+  <h1>轻 言</h1>
+  <p class="tagline fade-in d1">
+    安静的角落，有人会认真听。<br>
+    用 AI 写朋友圈文案，也做你最温柔的树洞。
+  </p>
+  <div class="h-actions fade-in d2">
+    <a class="btn-hero pri" href="https://py97530.github.io/qingyan/" target="_blank">立即体验</a>
+    <a class="btn-hero sec" href="#features">了解更多 ↓</a>
+  </div>
+</section>
+
+<div class="divider"><span>⋆ ˚ ✧ ˚ ⋆</span></div>
+
+<!-- ═══ 功能介绍 ═══ -->
+<section class="section" id="features">
+  <h2>轻言能做什么</h2>
+  <p class="s-sub">两个温柔的功能，陪你度过那些需要文字的时刻</p>
+
+  <div class="feature fade-in d1">
+    <span class="f-icon">✍️</span>
+    <h3>AI 文案生成</h3>
+    <p>
+      不想自己写朋友圈？选一个情绪，或者随便打几个字，轻言帮你写出三层不同深度的文案——<br>
+      🫧 <strong>轻轻的</strong>：不想太暴露心情时发，轻一点<br>
+      🫂 <strong>深一点的</strong>：更走心，更有力量<br>
+      🍃 <strong>留白</strong>：诗意、抽象、留有余味<br>
+      一键复制，直接发朋友圈。
+    </p>
+  </div>
+
+  <div class="feature fade-in d2">
+    <span class="f-icon">🌲</span>
+    <h3>情感树洞</h3>
+    <p>
+      这里有一个不说话的朋友。<br>
+      不灌鸡汤、不贴标签、不说「一切都会好起来的」。<br>
+      他像深夜里陪你蹲在便利店门口喝酸奶的人——<br>
+      可能也不懂该说什么，但他会认真听你说的每一句。<br>
+      完全匿名，不留痕迹。只属于你的角落。
+    </p>
+  </div>
+
+  <div class="feature fade-in d3">
+    <span class="f-icon">🎭</span>
+    <h3>匿名身份</h3>
+    <p>
+      在树洞里，你是谁不重要。<br>
+      选一个 emoji 头像 + 随机昵称，没人知道你是谁。<br>
+      正因为没有人认识你，所以你可以放心说真话。
+    </p>
+  </div>
+
+  <div class="feature fade-in d4">
+    <span class="f-icon">🎨</span>
+    <h3>三款主题</h3>
+    <p>
+      暖茶、晨光、暮色——三款精心调色的视觉主题，<br>
+      随心情切换。深夜用暗色不刺眼，白天用浅色也明亮。<br>
+      每一种心情，都有一个色调陪你。
+    </p>
+  </div>
+</section>
+
+<div class="divider"><span>⋆ ˚ ✧ ˚ ⋆</span></div>
+
+<!-- ═══ 使用步骤 ═══ -->
+<section class="section">
+  <h2>三步开始</h2>
+  <p class="s-sub">不需要下载，不需要注册，打开就能用</p>
+
+  <div class="steps">
+    <div class="step fade-in d1">
+      <span class="s-num">1</span>
+      <div class="s-body">
+        <h4>打开网页</h4>
+        <p>手机或电脑浏览器访问，无需安装任何 App</p>
+      </div>
+    </div>
+    <div class="step fade-in d2">
+      <span class="s-num">2</span>
+      <div class="s-body">
+        <h4>添加到桌面（可选）</h4>
+        <p>支持 PWA，添加到手机桌面就能像 App 一样全屏打开</p>
+      </div>
+    </div>
+    <div class="step fade-in d3">
+      <span class="s-num">3</span>
+      <div class="s-body">
+        <h4>开始说话</h4>
+        <p>写文案、聊心事——轻言随时等你</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 金句 ═══ -->
+<blockquote class="fade-in d1">
+  <q>不必大声说话，轻言细语，也能被听见。</q>
+  <footer>— 轻言</footer>
+</blockquote>
+
+</div>
+
+<!-- ═══ 底部 ═══ -->
+<footer>
+  <div class="f-links">
+    <a href="https://py97530.github.io/qingyan/" target="_blank">打开轻言</a>
+    <a href="https://wj.qq.com/s2/26960842/7f44/" target="_blank">反馈建议</a>
+    <a href="https://github.com/Py97530/qingyan" target="_blank">GitHub</a>
+  </div>
+  <p class="copy">轻言 v1.5 · Made with ☕ + 🌙 · 2026</p>
+</footer>
+
+</body>
+</html>
