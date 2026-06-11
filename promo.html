@@ -3,263 +3,539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>轻言 — 温柔的角落，有人在听</title>
+<title>轻言漫画 · 宣传片</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-
-  :root{
-    --bg:#1c1612;--bg-card:#221b14;--bg-input:#14100c;
-    --border:#2a2018;--border-focus:#b8895a;
-    --text:#c4b8a8;--text-secondary:#b8a590;--text-muted:#9a8872;
-    --accent:#d4a574;--accent-soft:#b8895a;
-    --accent-bg:rgba(184,137,90,0.12);--accent-bg-strong:rgba(184,137,90,0.18);--accent-bg-light:rgba(184,137,90,0.08);
-    --accent-gradient:linear-gradient(135deg,#c49a6c,#a07848);
-  }
-
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);color:var(--text);
-    font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
-    font-size:16px;line-height:1.7;
-    overflow-x:hidden;
-  }
-
-  /* ── 氛围光 ── */
-  .ambient{position:fixed;pointer-events:none;z-index:0}
-  .ambient-top{
-    top:0;left:50%;transform:translateX(-50%);
-    width:100%;max-width:600px;height:400px;
-    background:radial-gradient(ellipse at 50% 0%,rgba(184,137,90,0.1),transparent 70%);
-  }
-  .ambient-mid{
-    top:50%;left:50%;transform:translate(-50%,-50%);
-    width:500px;height:500px;
-    background:radial-gradient(circle,rgba(184,137,90,0.04),transparent 60%);
-  }
-
-  /* ── 容器 ── */
-  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 20px}
-
-  /* ── 导航 ── */
-  nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(28,22,18,0.75);border-bottom:1px solid var(--border)}
-  nav .nav-inner{max-width:520px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-  .nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:6px;background:linear-gradient(135deg,var(--accent),var(--accent-soft),#d4b896,var(--accent));background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s ease infinite}
-  @keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-  .nav-cta{
-    padding:8px 18px;border-radius:20px;border:none;
-    background:var(--accent-gradient);color:#fff;
-    font-size:0.78rem;font-weight:600;cursor:pointer;
-    font-family:inherit;letter-spacing:1px;
-    transition:all .2s;text-decoration:none;display:inline-block;
-  }
-  .nav-cta:hover{filter:brightness(1.1);box-shadow:0 2px 12px var(--accent-bg-strong)}
-
-  /* ── Hero ── */
-  .hero{text-align:center;padding:64px 20px 48px}
-  .hero .h-icon{font-size:3.5rem;display:block;margin-bottom:20px;animation:float 3s ease infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .hero h1{
-    font-size:2rem;font-weight:700;letter-spacing:8px;margin-bottom:12px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-soft),#d4b896,var(--accent));
-    background-size:300% 300%;
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    animation:shimmer 4s ease infinite;
-  }
-  .hero .tagline{font-size:0.95rem;color:var(--text-secondary);line-height:2;max-width:320px;margin:0 auto 28px}
-  .hero .h-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .btn-hero{
-    padding:12px 28px;border-radius:24px;font-size:0.85rem;font-weight:600;
-    cursor:pointer;font-family:inherit;letter-spacing:1px;
-    transition:all .25s;text-decoration:none;display:inline-block;
-  }
-  .btn-hero.pri{background:var(--accent-gradient);border:none;color:#fff}
-  .btn-hero.pri:hover{filter:brightness(1.1);box-shadow:0 4px 20px var(--accent-bg-strong);transform:translateY(-1px)}
-  .btn-hero.sec{background:none;border:1.5px solid var(--border);color:var(--text-secondary)}
-  .btn-hero.sec:hover{border-color:var(--accent-soft);color:var(--accent);background:var(--accent-bg-light)}
-
-  /* ── 分隔 ── */
-  .divider{display:flex;align-items:center;gap:10px;padding:24px 0;opacity:0.5}
-  .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-  .divider span{font-size:0.7rem;color:var(--text-muted);letter-spacing:2px}
-
-  /* ── 功能卡片 ── */
-  .section{padding:36px 0}
-  .section h2{text-align:center;font-size:1.15rem;letter-spacing:3px;margin-bottom:8px;color:var(--text)}
-  .section .s-sub{text-align:center;font-size:0.75rem;color:var(--text-muted);margin-bottom:32px;line-height:1.8}
-
-  .feature{background:var(--bg-card);border-radius:16px;padding:28px;margin-bottom:20px;border:1px solid var(--border);transition:all .3s}
-  .feature:hover{border-color:var(--accent-soft);box-shadow:0 4px 20px var(--accent-bg);transform:translateY(-2px)}
-  .feature .f-icon{font-size:2.2rem;margin-bottom:14px;display:block}
-  .feature h3{font-size:1rem;margin-bottom:8px;color:var(--accent);letter-spacing:2px}
-  .feature p{font-size:0.82rem;color:var(--text-secondary);line-height:1.85}
-
-  /* ── 三步 ── */
-  .steps{display:flex;flex-direction:column;gap:16px;margin-top:8px}
-  .step{display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg-card);border-radius:14px;border:1px solid var(--border)}
-  .step .s-num{width:32px;height:32px;border-radius:50%;background:var(--accent-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0}
-  .step .s-body h4{font-size:0.85rem;color:var(--text);margin-bottom:4px}
-  .step .s-body p{font-size:0.73rem;color:var(--text-secondary)}
-
-  /* ── 引用 ── */
-  blockquote{text-align:center;padding:40px 24px;margin:20px 0}
-  blockquote q{font-size:1rem;color:var(--accent);line-height:2;letter-spacing:2px;font-style:italic}
-  blockquote q::before,blockquote q::after{content:''}
-  blockquote footer{margin-top:12px;font-size:0.7rem;color:var(--text-muted);letter-spacing:1px}
-
-  /* ── 底部 ── */
-  footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);margin-top:20px}
-  footer .f-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-  footer .f-links a{color:var(--text-muted);text-decoration:none;font-size:0.75rem;transition:color .2s}
-  footer .f-links a:hover{color:var(--accent)}
-  footer .copy{font-size:0.65rem;color:var(--text-muted);opacity:0.6}
-
-  /* ── 动画 ── */
-  .fade-in{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}
-  .fade-in.d1{animation-delay:.1s}.fade-in.d2{animation-delay:.2s}.fade-in.d3{animation-delay:.3s}.fade-in.d4{animation-delay:.4s}
-  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-
-  /* ── 响应式 ── */
-  @media(max-width:400px){
-    .hero h1{font-size:1.6rem;letter-spacing:6px}
-    .hero .h-icon{font-size:2.8rem}
-    .feature{padding:20px}
-  }
-
-  @media(prefers-reduced-motion:reduce){
-    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1410;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:'PingFang SC','Microsoft YaHei',sans-serif;color:#e8d8c0;gap:14px}
+canvas{max-width:98vw;max-height:72vh;border-radius:12px;box-shadow:0 0 60px rgba(200,160,100,.2)}
+.ctrls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+button{padding:10px 26px;border-radius:22px;border:none;font-size:.9rem;cursor:pointer;font-family:inherit;transition:all .15s;font-weight:600}
+button:active{transform:scale(.95)}
+.btn-play{background:#8a7a5a;color:#fff}
+.btn-dl{background:#6a8a5a;color:#fff}
+.btn-dl.recording{background:#c06050;animation:pulse .5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.progress{width:100%;max-width:640px;height:4px;background:#2a2018;border-radius:2px;overflow:hidden;cursor:pointer}
+.progress .bar{height:100%;background:#c8a878;width:0%}
+.info{font-size:.75rem;color:#8a7a6a}
+.loading{color:#c8a878;font-size:1rem;margin:20px}
 </style>
 </head>
 <body>
 
-<div class="ambient ambient-top"></div>
-<div class="ambient ambient-mid"></div>
+<div class="loading" id="loading">🌿 正在准备画面...</div>
+<canvas id="c" width="1280" height="720" style="display:none"></canvas>
 
-<!-- ═══ 导航 ═══ -->
-<nav>
-  <div class="nav-inner">
-    <span class="nav-logo">轻 言</span>
-    <a class="nav-cta" href="https://py97530.github.io/qingyan/" target="_blank">打开轻言 →</a>
-  </div>
-</nav>
-
-<div class="wrap">
-
-<!-- ═══ Hero ═══ -->
-<section class="hero">
-  <span class="h-icon">🌲</span>
-  <h1>轻 言</h1>
-  <p class="tagline fade-in d1">
-    安静的角落，有人会认真听。<br>
-    用 AI 写朋友圈文案，也做你最温柔的树洞。
-  </p>
-  <div class="h-actions fade-in d2">
-    <a class="btn-hero pri" href="https://py97530.github.io/qingyan/" target="_blank">立即体验</a>
-    <a class="btn-hero sec" href="#features">了解更多 ↓</a>
-  </div>
-</section>
-
-<div class="divider"><span>⋆ ˚ ✧ ˚ ⋆</span></div>
-
-<!-- ═══ 功能介绍 ═══ -->
-<section class="section" id="features">
-  <h2>轻言能做什么</h2>
-  <p class="s-sub">两个温柔的功能，陪你度过那些需要文字的时刻</p>
-
-  <div class="feature fade-in d1">
-    <span class="f-icon">✍️</span>
-    <h3>AI 文案生成</h3>
-    <p>
-      不想自己写朋友圈？选一个情绪，或者随便打几个字，轻言帮你写出三层不同深度的文案——<br>
-      🫧 <strong>轻轻的</strong>：不想太暴露心情时发，轻一点<br>
-      🫂 <strong>深一点的</strong>：更走心，更有力量<br>
-      🍃 <strong>留白</strong>：诗意、抽象、留有余味<br>
-      一键复制，直接发朋友圈。
-    </p>
-  </div>
-
-  <div class="feature fade-in d2">
-    <span class="f-icon">🌲</span>
-    <h3>情感树洞</h3>
-    <p>
-      这里有一个不说话的朋友。<br>
-      不灌鸡汤、不贴标签、不说「一切都会好起来的」。<br>
-      他像深夜里陪你蹲在便利店门口喝酸奶的人——<br>
-      可能也不懂该说什么，但他会认真听你说的每一句。<br>
-      完全匿名，不留痕迹。只属于你的角落。
-    </p>
-  </div>
-
-  <div class="feature fade-in d3">
-    <span class="f-icon">🎭</span>
-    <h3>匿名身份</h3>
-    <p>
-      在树洞里，你是谁不重要。<br>
-      选一个 emoji 头像 + 随机昵称，没人知道你是谁。<br>
-      正因为没有人认识你，所以你可以放心说真话。
-    </p>
-  </div>
-
-  <div class="feature fade-in d4">
-    <span class="f-icon">🎨</span>
-    <h3>三款主题</h3>
-    <p>
-      暖茶、晨光、暮色——三款精心调色的视觉主题，<br>
-      随心情切换。深夜用暗色不刺眼，白天用浅色也明亮。<br>
-      每一种心情，都有一个色调陪你。
-    </p>
-  </div>
-</section>
-
-<div class="divider"><span>⋆ ˚ ✧ ˚ ⋆</span></div>
-
-<!-- ═══ 使用步骤 ═══ -->
-<section class="section">
-  <h2>三步开始</h2>
-  <p class="s-sub">不需要下载，不需要注册，打开就能用</p>
-
-  <div class="steps">
-    <div class="step fade-in d1">
-      <span class="s-num">1</span>
-      <div class="s-body">
-        <h4>打开网页</h4>
-        <p>手机或电脑浏览器访问，无需安装任何 App</p>
-      </div>
-    </div>
-    <div class="step fade-in d2">
-      <span class="s-num">2</span>
-      <div class="s-body">
-        <h4>添加到桌面（可选）</h4>
-        <p>支持 PWA，添加到手机桌面就能像 App 一样全屏打开</p>
-      </div>
-    </div>
-    <div class="step fade-in d3">
-      <span class="s-num">3</span>
-      <div class="s-body">
-        <h4>开始说话</h4>
-        <p>写文案、聊心事——轻言随时等你</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 金句 ═══ -->
-<blockquote class="fade-in d1">
-  <q>不必大声说话，轻言细语，也能被听见。</q>
-  <footer>— 轻言</footer>
-</blockquote>
-
+<div class="ctrls" id="ctrls" style="display:none">
+  <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶ 播放</button>
+  <button class="btn-dl" id="btnDl" onclick="startExport()">⬇ 导出 MP4</button>
+  <span class="info" id="info">00:00 / 00:35</span>
 </div>
+<div class="progress" id="progressBar" style="display:none" onclick="seek(event)">
+  <div class="bar" id="bar"></div>
+</div>
+<p class="info" style="display:none" id="meta">1280×720 · 30fps · 约35秒 · 温馨治愈风</p>
 
-<!-- ═══ 底部 ═══ -->
-<footer>
-  <div class="f-links">
-    <a href="https://py97530.github.io/qingyan/" target="_blank">打开轻言</a>
-    <a href="https://wj.qq.com/s2/26960842/7f44/" target="_blank">反馈建议</a>
-    <a href="https://github.com/Py97530/qingyan" target="_blank">GitHub</a>
-  </div>
-  <p class="copy">轻言 v1.5 · Made with ☕ + 🌙 · 2026</p>
-</footer>
+<script>
+// ═══════════════════════════════════════
+// 轻言漫画宣传片 v2
+// ═══════════════════════════════════════
 
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+var W = 1280, H = 720;
+var DURATION = 35;
+var FPS = 30;
+
+var playing = false, currentTime = 0, rafId = null, playStart = 0, playBase = 0;
+
+// ── 预加载壁纸 ──
+var IMG_V = [], IMG_H = [];
+var imgLoaded = 0, imgTotal = 20;
+
+function loadImage(path, arr){
+  var img = new Image();
+  img.onload = function(){
+    imgLoaded++;
+    var el = document.getElementById('loading');
+    if(el) el.textContent = '🌿 正在准备画面... ' + imgLoaded + '/' + imgTotal;
+    if(imgLoaded >= imgTotal) startApp();
+  };
+  img.onerror = function(){
+    imgLoaded++;
+    if(imgLoaded >= imgTotal) startApp();
+  };
+  img.src = path;
+  arr.push(img);
+}
+
+for(var i = 1; i <= 10; i++){
+  var n = (i < 10 ? '0' : '') + i;
+  loadImage('anime-wallpapers/thumb/' + n + '-ghibli.jpg', IMG_V);
+}
+for(var i = 1; i <= 10; i++){
+  var n = (i < 10 ? '0' : '') + i;
+  loadImage('weixin-wallpapers/thumb/' + n + '.jpg', IMG_H);
+}
+
+function startApp(){
+  var el = document.getElementById('loading');
+  if(el) el.style.display = 'none';
+  canvas.style.display = 'block';
+  document.getElementById('ctrls').style.display = 'flex';
+  document.getElementById('progressBar').style.display = 'block';
+  document.getElementById('meta').style.display = 'block';
+  render(0);
+}
+
+// ── 工具 ──
+function lerp(a,b,t){ return a+(b-a)*t }
+function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)) }
+function easeOut(t){ return 1-Math.pow(1-t,3) }
+function easeInOut(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2 }
+function easeBack(t){ var c=1.7;return (c+1)*t*t*t-c*t*t }
+
+function drawText(ctx,text,x,y,size,color,align,glow){
+  ctx.save();
+  ctx.textAlign=align||'center';
+  ctx.textBaseline='middle';
+  ctx.font='bold '+size+'px "PingFang SC","Microsoft YaHei",sans-serif';
+  if(glow){ ctx.shadowColor=color; ctx.shadowBlur=glow; }
+  ctx.fillStyle=color;
+  ctx.fillText(text,x,y);
+  ctx.restore();
+}
+
+// ── 粒子 ──
+var particles = [];
+function spawnP(x,y,n,c,s,l){
+  for(var i=0;i<n;i++){
+    var a=Math.random()*Math.PI*2;
+    particles.push({x:x,y:y,vx:Math.cos(a)*s*(.3+Math.random()),vy:Math.sin(a)*s*(.3+Math.random()),life:l*(.3+Math.random()*.7),maxLife:l,color:c,size:1.5+Math.random()*3});
+  }
+}
+function updateP(dt){
+  for(var i=particles.length-1;i>=0;i--){
+    var p=particles[i]; p.x+=p.vx*dt*60; p.y+=p.vy*dt*60; p.life-=dt;
+    if(p.life<=0) particles.splice(i,1);
+  }
+}
+function drawP(ctx){
+  for(var i=0;i<particles.length;i++){
+    var p=particles[i], a=p.life/p.maxLife;
+    ctx.fillStyle = p.color.replace('1)', a+')');
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size*a, 0, Math.PI*2); ctx.fill();
+  }
+}
+
+// ── 圆角图片 ──
+function drawImg(ctx, img, x, y, w, h, r){
+  ctx.save();
+  ctx.beginPath(); ctx.roundRect(x, y, w, h, r||8); ctx.clip();
+  ctx.drawImage(img, x, y, w, h);
+  ctx.restore();
+}
+
+// ── 温馨背景 ──
+function warmBg(ctx){
+  var grd = ctx.createLinearGradient(0, 0, 0, H);
+  grd.addColorStop(0, '#2a1c12');
+  grd.addColorStop(0.5, '#352418');
+  grd.addColorStop(1, '#1e1008');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function warmGlow(ctx, cx, cy, r, intensity){
+  var grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+  grd.addColorStop(0, 'rgba(255,220,180,'+(intensity*0.1)+')');
+  grd.addColorStop(0.5, 'rgba(200,160,120,'+(intensity*0.04)+')');
+  grd.addColorStop(1, 'rgba(30,20,14,0)');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+}
+
+// ═══════════════════════════════════
+// 场景1: 品牌开场 (0-4s)
+// ═══════════════════════════════════
+function drawScene1(t, local, prog){
+  warmBg(ctx);
+  warmGlow(ctx, W/2, H/2-30, 500, easeOut(prog));
+
+  var tAlpha = clamp(prog*1.5, 0, 1);
+  var tScale = lerp(1.3, 1, easeOut(clamp(prog*1.2,0,1)));
+  ctx.save();
+  ctx.globalAlpha = tAlpha;
+  ctx.translate(W/2, H/2-20); ctx.scale(tScale, tScale);
+  drawText(ctx, '轻言漫画', 0, 0, 68, '#f0d8b0', 'center', 40);
+  ctx.restore();
+
+  if(prog > 0.25){
+    ctx.globalAlpha = clamp((prog-0.25)/0.5, 0, 1);
+    ctx.fillStyle = '#c8b898';
+    ctx.font = '20px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('QINGYAN  MANGA', W/2, H/2+55);
+    ctx.globalAlpha = 1;
+  }
+
+  if(Math.random() < 0.2) spawnP(W/2+Math.random()*300-150, H/2+80, 1, 'rgba(240,200,160,1)', 12, 3);
+  updateP(1/FPS); drawP(ctx);
+}
+
+// ═══════════════════════════════════
+// 场景2: 宫崎骏美学 + 竖屏插图 (4-9s)
+// ═══════════════════════════════════
+function drawScene2(t, local, prog){
+  warmBg(ctx);
+
+  var cardW = 130, cardH = 232, gap = 40;
+  var totalW = 3*cardW + 2*gap, startX = (W - totalW)/2, cardY = 200;
+
+  for(var i = 0; i < 3; i++){
+    var cp = easeOut(clamp((prog - i*0.2)/0.5, 0, 1));
+    var cx = startX + i*(cardW+gap), cy = cardY + lerp(35, 0, cp);
+    ctx.save(); ctx.globalAlpha = clamp(cp*1.5, 0, 1);
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+    ctx.fillStyle = '#f5efe0';
+    ctx.beginPath(); ctx.roundRect(cx-2, cy-2, cardW+4, cardH+4, 10); ctx.fill();
+    ctx.shadowColor = 'transparent';
+    if(IMG_V[i] && IMG_V[i].complete) drawImg(ctx, IMG_V[i], cx, cy, cardW, cardH, 8);
+    ctx.restore();
+  }
+
+  if(prog > 0.2){
+    ctx.globalAlpha = clamp((prog-0.2)/0.5, 0, 1);
+    drawText(ctx, '宫崎骏动漫美学', W/2, 110, 38, '#f0d8b0', 'center', 20);
+    ctx.fillStyle = '#c8b090'; ctx.font = '18px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('原创插画 · 温暖治愈 · 油画细腻笔触', W/2, 150);
+    ctx.fillText('竖屏手机壁纸 · 760×1280', W/2, 175);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景3: 横屏插图 (9-14.5s)
+// ═══════════════════════════════════
+function drawScene3(t, local, prog){
+  warmBg(ctx);
+  var cardW = 360, cardH = 203, startX = (W - 2*cardW - 30)/2;
+
+  for(var i = 0; i < 2; i++){
+    var cp = easeOut(clamp((prog - i*0.22)/0.5, 0, 1));
+    var cy = 200 + i*(cardH + 35);
+    ctx.save(); ctx.globalAlpha = clamp(cp*1.5, 0, 1);
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+    ctx.fillStyle = '#f5efe0';
+    ctx.beginPath(); ctx.roundRect(startX-2, cy-2, cardW+4, cardH+4, 10); ctx.fill();
+    ctx.shadowColor = 'transparent';
+    if(IMG_H[i] && IMG_H[i].complete) drawImg(ctx, IMG_H[i], startX, cy, cardW, cardH, 8);
+    ctx.restore();
+  }
+
+  if(prog > 0.2){
+    ctx.globalAlpha = clamp((prog-0.2)/0.5, 0, 1);
+    drawText(ctx, '横屏桌面壁纸', W/2, 110, 38, '#f0d8b0', 'center', 20);
+    ctx.fillStyle = '#c8b090'; ctx.font = '18px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('宫崎骏动漫美学 · 温暖治愈光影', W/2, 150);
+    ctx.fillText('横屏桌面专属 · 2282×1280', W/2, 175);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景4: 竖屏多图展示 (14.5-19s)
+// ═══════════════════════════════════
+function drawScene4(t, local, prog){
+  warmBg(ctx);
+  warmGlow(ctx, W/2, H/2, 400, 1);
+
+  var cols = 3, imgW = 150, imgH = 267, gapX = 25, gapY = 20;
+  var startX = (W - cols*imgW - (cols-1)*gapX)/2, startY = 50;
+
+  for(var i = 0; i < 6; i++){
+    var col = i % 3, row = Math.floor(i/3);
+    var cx = startX + col*(imgW+gapX), cy = startY + row*(imgH+gapY);
+    var cp = easeOut(clamp((prog - i*0.1)/0.6, 0, 1));
+    ctx.save(); ctx.globalAlpha = clamp(cp*1.5, 0, 1);
+    ctx.fillStyle = '#f5efe0';
+    ctx.beginPath(); ctx.roundRect(cx-2, cy-2, imgW+4, imgH+4, 8); ctx.fill();
+    var idx = i + 3;
+    if(IMG_V[idx] && IMG_V[idx].complete) drawImg(ctx, IMG_V[idx], cx, cy, imgW, imgH, 6);
+    ctx.restore();
+  }
+
+  if(prog > 0.1){
+    ctx.globalAlpha = clamp((prog-0.1)/0.4, 0, 1);
+    drawText(ctx, '✨ 每一张都独一无二', W/2, H-22, 22, '#e8d0a0', 'center', 8);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景5: 完全免费 — 高潮 (19-25s)
+// ═══════════════════════════════════
+function drawScene5(t, local, prog){
+  warmBg(ctx);
+  warmGlow(ctx, W/2, H/2, 550, 1.5);
+
+  // 背景插图淡影
+  ctx.globalAlpha = 0.12;
+  if(IMG_V[0] && IMG_V[0].complete) ctx.drawImage(IMG_V[0], 40, H-350, 150, 267);
+  if(IMG_V[1] && IMG_V[1].complete) ctx.drawImage(IMG_V[1], W-190, H-350, 150, 267);
+  if(IMG_H[0] && IMG_H[0].complete) ctx.drawImage(IMG_H[0], W/2-220, H/2-260, 440, 248);
+  ctx.globalAlpha = 1;
+
+  var chars = ['完', '全', '免', '费'];
+  for(var i = 0; i < chars.length; i++){
+    var ct = clamp((prog - 0.08 - i*0.2)/(0.24), 0, 1);
+    if(ct <= 0) continue;
+    var scale = easeBack(ct), alpha = clamp(ct*2, 0, 1);
+    var cx = W/2 - (chars.length-1)*62 + i*124;
+    ctx.save(); ctx.globalAlpha = alpha;
+    ctx.translate(cx, H/2-30); ctx.scale(scale, scale);
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 90px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(200,160,100,0.8)'; ctx.shadowBlur = 40;
+    ctx.fillText(chars[i], 0, 0);
+    ctx.restore();
+  }
+
+  if(prog > 0.5){
+    ctx.globalAlpha = clamp((prog-0.5)/0.4, 0, 1);
+    var bw = 240, bh = 52, bx = W/2-bw/2, by = H/2+90;
+    ctx.fillStyle = '#3a6a3a'; ctx.strokeStyle = '#6aaa6a'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 26); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#a8e8b8'; ctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('🎁 永久免费下载', W/2, by+bh/2);
+    ctx.globalAlpha = 1;
+  }
+
+  if(prog > 0.65){
+    ctx.globalAlpha = clamp((prog-0.65)/0.35, 0, 1);
+    ctx.fillStyle = '#c8b898'; ctx.font = '18px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('无需赞赏 · 无需密码 · 直接下载', W/2, H/2+170);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景6: 为什么选择 (25-30s)
+// ═══════════════════════════════════
+function drawScene6(t, local, prog){
+  warmBg(ctx);
+
+  var items = [
+    {icon:'🎨', t:'原创插画', d:'100%原创 · 独一无二'},
+    {icon:'✨', t:'高清画质', d:'细节丰富 · 色彩动人'},
+    {icon:'⚡', t:'一键下载', d:'即点即得 · 无需等待'},
+    {icon:'💛', t:'永久免费', d:'真心分享 · 不收一分'},
+    {icon:'📱', t:'双尺寸', d:'竖屏手机 + 横屏桌面'}
+  ];
+
+  var startY = 120;
+  for(var i = 0; i < items.length; i++){
+    var it = clamp((prog - 0.05 - i*0.16)/0.4, 0, 1);
+    if(it <= 0) continue;
+    var y = startY + i*90 + lerp(25, 0, easeOut(it));
+    ctx.globalAlpha = clamp(it*2, 0, 1);
+    ctx.font = '34px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(items[i].icon, 260, y+8);
+    ctx.fillStyle = '#f0d8b0'; ctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'left'; ctx.fillText(items[i].t, 310, y-6);
+    ctx.fillStyle = '#b8a088'; ctx.font = '16px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillText(items[i].d, 310, y+22);
+    ctx.globalAlpha = 1;
+  }
+
+  if(prog > 0.1){
+    ctx.globalAlpha = clamp((prog-0.1)/0.3, 0, 1);
+    drawText(ctx, '为什么选择轻言漫画？', W/2, 60, 28, '#f0d8b0', 'center', 12);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景7: 横屏多图展示 (30-33.5s)
+// ═══════════════════════════════════
+function drawScene7(t, local, prog){
+  warmBg(ctx);
+  warmGlow(ctx, W/2, H/2, 400, 1);
+
+  var cols = 3, imgW = 280, imgH = 158, gapX = 20, gapY = 20;
+  var startX = (W - cols*imgW - (cols-1)*gapX)/2, startY = 80;
+
+  for(var i = 0; i < 6; i++){
+    var col = i % 3, row = Math.floor(i/3);
+    var cx = startX + col*(imgW+gapX), cy = startY + row*(imgH+gapY);
+    var cp = easeOut(clamp((prog - i*0.1)/0.6, 0, 1));
+    ctx.save(); ctx.globalAlpha = clamp(cp*1.5, 0, 1);
+    ctx.fillStyle = '#f5efe0';
+    ctx.beginPath(); ctx.roundRect(cx-2, cy-2, imgW+4, imgH+4, 8); ctx.fill();
+    var idx = i + 4;
+    if(IMG_H[idx] && IMG_H[idx].complete) drawImg(ctx, IMG_H[idx], cx, cy, imgW, imgH, 6);
+    ctx.restore();
+  }
+
+  if(prog > 0.1){
+    ctx.globalAlpha = clamp((prog-0.1)/0.4, 0, 1);
+    drawText(ctx, '横屏 + 竖屏 · 任你选择', W/2, H-22, 22, '#e8d0a0', 'center', 8);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 场景8: CTA (33.5-35s)
+// ═══════════════════════════════════
+function drawScene8(t, local, prog){
+  warmBg(ctx);
+  var pulse = Math.sin(prog*Math.PI*4)*.3+.7;
+  warmGlow(ctx, W/2, H/2, 450, pulse);
+
+  ctx.globalAlpha = clamp(prog*3, 0, 1);
+  drawText(ctx, '轻言漫画', W/2, H/2-90, 56, '#f0d8b0', 'center', 30);
+  ctx.globalAlpha = 1;
+
+  if(prog > 0.15){
+    ctx.globalAlpha = clamp((prog-0.15)/0.5, 0, 1);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 28px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.shadowColor = 'rgba(255,220,180,0.5)'; ctx.shadowBlur = 20;
+    ctx.fillText('py97530.github.io/qingyan', W/2, H/2);
+    ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+  }
+
+  if(prog > 0.35){
+    var bProg = easeBack(clamp((prog-0.35)/0.5, 0, 1));
+    var bw = 260, bh = 56, bx = W/2-bw/2, by = H/2+50;
+    ctx.save(); ctx.globalAlpha = clamp(bProg, 0, 1);
+    ctx.fillStyle = '#c8a878'; ctx.shadowColor = 'rgba(200,160,120,0.5)'; ctx.shadowBlur = 25*pulse;
+    ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 28); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 22px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('👆 立即访问', W/2, by+bh/2);
+    ctx.restore();
+  }
+
+  if(prog > 0.55){
+    ctx.globalAlpha = clamp((prog-0.55)/0.45, 0, 1);
+    ctx.fillStyle = '#c8b090'; ctx.font = '17px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText('竖屏 + 横屏 · 宫崎骏美学 · 永久免费', W/2, H/2+150);
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ═══════════════════════════════════
+// 调度
+// ═══════════════════════════════════
+var scenes = [drawScene1, drawScene2, drawScene3, drawScene4, drawScene5, drawScene6, drawScene7, drawScene8];
+var starts = [0, 4, 9, 14.5, 19, 25, 30, 33.5];
+
+function getIdx(t){
+  for(var i = starts.length-1; i >= 0; i--) if(t >= starts[i]) return i;
+  return 0;
+}
+
+function render(t){
+  ctx.clearRect(0, 0, W, H);
+  var idx = getIdx(t);
+  var local = t - starts[idx];
+  var end = (idx < starts.length-1) ? starts[idx+1] : DURATION;
+  scenes[idx](t, local, clamp(local/(end-starts[idx]), 0, 1));
+  updateUI(t);
+}
+
+function updateUI(t){
+  document.getElementById('bar').style.width = (t/DURATION*100)+'%';
+  var m = Math.floor(t/60), s = Math.floor(t%60);
+  document.getElementById('info').textContent =
+    String(m).padStart(2,'0')+':'+String(s).padStart(2,'0') + ' / 00:35';
+}
+
+// ═══════════════════════════════════
+// 播放
+// ═══════════════════════════════════
+function loop(){
+  if(!playing) return;
+  var elapsed = (performance.now() - playStart)/1000;
+  currentTime = Math.min(playBase + elapsed, DURATION);
+  render(currentTime);
+  if(currentTime >= DURATION){
+    currentTime = DURATION; playing = false;
+    document.getElementById('btnPlay').textContent = '⟳ 重播';
+    return;
+  }
+  rafId = requestAnimationFrame(loop);
+}
+
+function togglePlay(){
+  if(playing){
+    playing = false; if(rafId) cancelAnimationFrame(rafId);
+    document.getElementById('btnPlay').textContent = '▶ 播放';
+  } else {
+    if(currentTime >= DURATION) currentTime = 0;
+    playBase = currentTime; playStart = performance.now();
+    playing = true;
+    document.getElementById('btnPlay').textContent = '⏸ 暂停';
+    rafId = requestAnimationFrame(loop);
+  }
+}
+
+function seek(e){
+  var rect = document.getElementById('progressBar').getBoundingClientRect();
+  currentTime = clamp((e.clientX - rect.left)/rect.width * DURATION, 0, DURATION);
+  render(currentTime);
+}
+
+// ═══════════════════════════════════
+// 导出 MP4
+// ═══════════════════════════════════
+var mediaRecorder = null, recordedChunks = [];
+function startExport(){
+  var btn = document.getElementById('btnDl');
+  if(mediaRecorder && mediaRecorder.state === 'recording'){
+    mediaRecorder.stop(); return;
+  }
+  currentTime = 0; render(0);
+  var stream = canvas.captureStream(FPS);
+  var mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' :
+             MediaRecorder.isTypeSupported('video/webm;codecs=vp8') ? 'video/webm;codecs=vp8' : 'video/webm';
+  recordedChunks = [];
+  mediaRecorder = new MediaRecorder(stream, {mimeType: mime, videoBitsPerSecond: 5000000});
+  mediaRecorder.ondataavailable = function(e){ if(e.data.size>0) recordedChunks.push(e.data); };
+  mediaRecorder.onstop = function(){
+    var blob = new Blob(recordedChunks, {type:'video/webm'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = '轻言漫画宣传片.webm'; a.click();
+    URL.revokeObjectURL(url);
+    btn.classList.remove('recording'); btn.textContent = '⬇ 导出 MP4';
+    mediaRecorder = null; playing = false;
+    if(rafId) cancelAnimationFrame(rafId);
+    document.getElementById('btnPlay').textContent = '⟳ 重播';
+    currentTime = DURATION;
+  };
+  mediaRecorder.start();
+  btn.classList.add('recording'); btn.textContent = '⏹ 停止录制';
+  playing = true; playBase = 0; playStart = performance.now();
+  document.getElementById('btnPlay').textContent = '⏸ 暂停';
+  function recordLoop(){
+    if(!mediaRecorder || mediaRecorder.state !== 'recording'){ playing = false; return; }
+    var elapsed = (performance.now() - playStart)/1000;
+    currentTime = Math.min(elapsed, DURATION);
+    render(currentTime);
+    if(currentTime >= DURATION){ render(DURATION); mediaRecorder.stop(); return; }
+    rafId = requestAnimationFrame(recordLoop);
+  }
+  rafId = requestAnimationFrame(recordLoop);
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.code==='Space'){ e.preventDefault(); togglePlay(); }
+  if(e.code==='ArrowLeft'){ currentTime = Math.max(0, currentTime-.5); render(currentTime); }
+  if(e.code==='ArrowRight'){ currentTime = Math.min(DURATION, currentTime+.5); render(currentTime); }
+});
+</script>
 </body>
 </html>
