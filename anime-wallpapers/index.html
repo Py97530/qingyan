@@ -7,24 +7,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── 防截屏录屏 ── */
-img{
-  -webkit-user-drag:none;user-drag:none;
-  -webkit-touch-callout:none;
-}
-.protected{
-  position:relative;
-}
-.protected::after{
-  content:'';
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.03) 40px,rgba(255,255,255,0.03) 41px);
-  pointer-events:none;z-index:1;
-}
-.no-select{
-  -webkit-user-select:none;user-select:none;
-}
-
 body{
   font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
   background:#0d1b2a;color:#c8dce8;line-height:1.7;min-height:100vh;
@@ -35,7 +17,7 @@ body{
 .hero{text-align:center;padding:36px 0 20px}
 .hero h1{font-size:1.4rem;color:#e8e0d0;margin-bottom:6px}
 .hero .sub{font-size:0.82rem;color:#8899aa}
-.badge{display:inline-block;background:#1b3a5c;color:#8ab8d8;padding:4px 14px;border-radius:20px;font-size:0.75rem;margin-top:10px}
+.badge{display:inline-block;background:#1b5c3a;color:#8ad8a8;padding:4px 14px;border-radius:20px;font-size:0.75rem;margin-top:10px}
 
 /* ── 翻页画廊 ── */
 .gallery-wrap{position:relative;margin:0 0 24px}
@@ -59,13 +41,13 @@ body{
   padding:7px 8px 4px;text-align:center;
   font-size:0.73rem;color:#a0bcd0;
 }
-.wall-card .buy-one{
+.wall-card .dl-one{
   display:block;width:100%;padding:5px 0 8px;text-align:center;
-  font-size:0.68rem;color:#c8a060;cursor:pointer;
+  font-size:0.68rem;color:#8ab8d8;cursor:pointer;
   background:none;border:none;font-family:inherit;
   transition:color .2s;
 }
-.wall-card .buy-one:hover{color:#e8c878}
+.wall-card .dl-one:hover{color:#a8d8f0}
 
 /* 翻页控件 */
 .pager{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
@@ -94,66 +76,8 @@ body{
 .style-note h3{font-size:0.9rem;color:#d8c8a8;margin-bottom:8px}
 .style-note p{font-size:0.75rem;color:#8a9ab0;line-height:1.6}
 
-/* ── 购买区 ── */
-.buy-section{margin:0 0 24px}
-
-/* 全包价格 */
-.price-card{
-  background:linear-gradient(135deg,#0f2538,#152d42);
-  border:1.5px solid #2a4a6a;
-  border-radius:20px;padding:28px 20px;text-align:center;margin:0 0 12px;
-}
-.price-card .yuan{font-size:0.8rem;color:#8899aa}
-.price-card .num{font-size:3rem;font-weight:700;color:#e8d8b8;line-height:1}
-.price-card .strike{text-decoration:line-through;color:#4a6a7a;font-size:0.9rem;margin-left:6px}
-.price-card .what{font-size:0.8rem;color:#7a9aaa;margin:6px 0 0}
-
-/* 也可以单买 */
-.also-single{
-  text-align:center;font-size:0.75rem;color:#7a9aaa;margin:0 0 16px;
-}
-.also-single span{color:#c8a060}
-
-/* ── 赞赏解锁区 ── */
-.unlock-box{
-  background:#0a1620;border:1.5px solid #1a3a5a;border-radius:16px;
-  padding:20px 18px;margin:0 0 20px;text-align:center;
-}
-.unlock-box .t{color:#d8e8f0;font-weight:600;font-size:0.88rem;margin-bottom:6px}
-.unlock-box .steps{font-size:0.72rem;color:#7a9aaa;line-height:2;margin-bottom:14px}
-.unlock-box .steps .hi{color:#e8c878;font-weight:600}
-
-/* 赞赏码占位 */
-.qr-placeholder{
-  width:160px;height:160px;margin:0 auto 12px;
-  background:#1a2840;border:2px dashed #2a4a6a;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:2.5rem;color:#4a6a7a;
-}
-.qr-img{max-width:160px;border-radius:12px;margin:0 auto 12px;display:block}
-
-/* 密码输入 */
-.pw-row{display:flex;gap:8px;max-width:300px;margin:0 auto}
-.pw-row input{
-  flex:1;padding:10px 14px;border-radius:10px;
-  border:1.5px solid #2a4a6a;background:#0f2030;color:#d8e8f0;
-  font-size:0.85rem;outline:none;text-align:center;font-family:inherit;
-  letter-spacing:2px;
-}
-.pw-row input:focus{border-color:#5a8aaa}
-.pw-row input::placeholder{color:#4a6a7a;letter-spacing:0}
-.pw-row button{
-  padding:10px 18px;border-radius:10px;
-  background:linear-gradient(135deg,#5a8aaa,#3a6a8a);
-  color:#fff;border:none;font-size:0.85rem;cursor:pointer;font-family:inherit;
-  white-space:nowrap;transition:all .15s;
-}
-.pw-row button:active{transform:scale(.95)}
-.pw-wrong{color:#c06a6a;font-size:0.7rem;margin-top:8px;display:none}
-
-/* 下载按钮（初始隐藏） */
-.dl-btns{display:none;margin-top:16px}
-.dl-btns.show{display:block}
+/* ── 下载区 ── */
+.dl-section{margin:0 0 24px;text-align:center}
 .btn{
   display:block;width:100%;padding:16px;border-radius:16px;
   font-size:1rem;font-weight:600;text-align:center;cursor:pointer;
@@ -167,10 +91,7 @@ body{
   margin:0 0 10px;
 }
 .btn-dl:hover{box-shadow:0 6px 28px rgba(58,106,138,.5)}
-.btn-preview{
-  background:#0f2030;color:#a8c0d0;border:1px solid #2a4a6a;
-}
-.dl-note{text-align:center;font-size:0.7rem;color:#5a8a6a;margin-top:12px}
+.dl-note{text-align:center;font-size:0.72rem;color:#6a8a8a;margin-top:8px}
 
 /* 弹窗 */
 .lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.94);z-index:999;flex-direction:column;align-items:center;justify-content:center}
@@ -190,17 +111,15 @@ body{
 .footer a{color:#6a8a9a;text-decoration:none}
 </style>
 </head>
-<body class="no-select">
+<body>
 <div class="container">
 
   <!-- Hero -->
   <div class="hero">
     <h1>🎬 宫崎骏风 · 原创插画壁纸</h1>
     <p class="sub">10张治愈系手机壁纸 · 原创插画 · 760×1280</p>
-    <span class="badge">🔒 赞赏后解锁下载</span>
+    <span class="badge">🎁 免费下载</span>
   </div>
-
-  <div id="blurWarn" style="display:none;text-align:center;font-size:0.7rem;color:#c06a6a;background:#1a1010;border:1px solid #4a2020;border-radius:8px;padding:6px 12px;margin:0 0 14px">⚠️ 检测到截屏/录屏行为 · 原创作品受保护</div>
 
   <p style="text-align:center;font-size:0.7rem;color:#6a8a8a;margin:0 0 14px">👆 当前为预览画质 · 点图片查看高清原图</p>
 
@@ -213,7 +132,6 @@ body{
       <button id="btnNext" onclick="goPage(1)">下一页 »</button>
     </div>
     <p style="text-align:center;font-size:0.68rem;color:#6a8a8a;margin-top:8px">👆 当前为预览画质 · 点图片查看高清原图</p>
-    <p style="text-align:center;font-size:0.68rem;color:#4a6a7a;margin-top:4px">👇 点「¥2 单买」可直接下载单张</p>
   </div>
 
   <!-- 风格说明 -->
@@ -222,52 +140,18 @@ body{
     <p>原创插画 · 宫崎骏动漫美学<br>油画般细腻笔触 · 细节清晰<br>高饱和温暖光影 · 治愈氛围</p>
   </div>
 
-  <!-- ── 购买区 ── -->
-  <div class="buy-section">
-
-    <!-- 全包价格 -->
-    <div class="price-card">
-      <span class="yuan">¥</span><span class="num">6.9</span><span class="strike">¥12.9</span>
-      <p class="what">全部10张打包 · 永久拥有 · 一张不到7毛</p>
-    </div>
-
-    <p class="also-single">也可以<span>¥2/张</span>单买，点画廊卡片下方按钮</p>
-
-    <!-- 赞赏解锁 -->
-    <div class="unlock-box">
-      <div class="t">🔐 赞赏后解锁下载</div>
-      <div class="steps">
-        <span class="hi">①</span> 扫码赞赏 ¥6.9（全包）或 ¥2（单张）<br>
-        <span class="hi">②</span> 截图发我微信，秒回解锁密码<br>
-        <span class="hi">③</span> 输入密码，即可下载<br>
-        <span style="color:#c06a6a;font-size:0.68rem">❗ 非好友请先添加微信：pyyssb0000，备注「壁纸」</span>
-      </div>
-
-      <!-- 赞赏码 -- 替换 src 为你的赞赏码图片 -->
-      <img class="qr-img" src="qr-code.jpg" alt="赞赏码" style="display:block">
-
-      <div class="pw-row">
-        <input type="text" id="pwInput" placeholder="输入解锁密码" maxlength="20">
-        <button onclick="unlock()">解锁</button>
-      </div>
-      <p class="pw-wrong" id="pwWrong">密码错误，请重试</p>
-
-      <!-- 解锁后显示 -->
-      <div class="dl-btns" id="dlBtns">
-        <button class="btn btn-dl" onclick="downloadPack()">⬇ 下载全部 10 张 (.zip)</button>
-        <button class="btn btn-preview" onclick="downloadFreeSample()">🎁 先免费体验一张</button>
-        <p class="dl-note">✅ 已解锁 · 点击按钮即下载</p>
-      </div>
-    </div>
-
+  <!-- ── 下载区 ── -->
+  <div class="dl-section">
+    <button class="btn btn-dl" onclick="downloadPack()">⬇ 下载全部 10 张 (.zip)</button>
+    <p class="dl-note">🎁 完全免费 · 无需密码 · 点击即下载</p>
   </div>
 
   <!-- FAQ -->
   <div class="faq">
     <h2>💬 可能想问</h2>
     <div class="faq-item">
-      <div class="q">怎么获得密码？</div>
-      <div class="a">扫码赞赏 ¥6.9（或 ¥2 单买），截图发我微信，我秒回密码给你。</div>
+      <div class="q">真的免费吗？</div>
+      <div class="a">是的，完全免费下载，无需任何付费。</div>
     </div>
     <div class="faq-item">
       <div class="q">图片清晰吗？</div>
@@ -296,32 +180,7 @@ body{
 </div>
 
 <script>
-// ═══ 防截屏录屏 ═══
-document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
-document.addEventListener('dragstart', function(e){ e.preventDefault(); });
-document.addEventListener('keydown', function(e){
-  // 屏蔽 Ctrl+S / Ctrl+P / Ctrl+Shift+I / F12 / PrintScreen
-  if(e.ctrlKey && (e.key==='s'||e.key==='S'||e.key==='p'||e.key==='P'||e.key==='u'||e.key==='U')) e.preventDefault();
-  if(e.ctrlKey && e.shiftKey && (e.key==='i'||e.key==='I'||e.key==='c'||e.key==='C')) e.preventDefault();
-  if(e.key==='F12'||e.key==='PrintScreen') e.preventDefault();
-});
-// 检测页面失焦(可能截屏/录屏)
-var blurCount = 0;
-window.addEventListener('blur', function(){ blurCount++; });
-window.addEventListener('focus', function(){
-  if(blurCount > 0){
-    var el = document.getElementById('blurWarn');
-    if(el){ el.style.display='block'; setTimeout(function(){ el.style.display='none'; }, 3000); }
-  }
-});
-// 移动端检测
-document.addEventListener('visibilitychange', function(){
-  if(document.hidden){ blurCount++; }
-});
-
 // ═══ 配置 ═══
-var UNLOCK_PASSWORD = 'shmily543125';  // 改成你想要的密码
-
 var names = [
   '01-ghibli','02-ghibli','03-ghibli','04-ghibli','05-ghibli',
   '06-ghibli','07-ghibli','08-ghibli','09-ghibli','10-ghibli'
@@ -331,7 +190,6 @@ var labels = [
   '行走城堡','水中列车','月夜飞行','竹林秘境','鲤鱼旗天'
 ];
 var totalPages = 2, perPage = 5, currentPage = 0, currentIdx = 0;
-var unlocked = false;
 
 // ═══ 画廊 ═══
 function renderPage(pg){
@@ -346,9 +204,9 @@ function renderPage(pg){
         var card = document.createElement('div');
         card.className = 'wall-card';
         card.innerHTML =
-          '<div onclick="openLightbox('+idx+')" class="protected"><img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="200" height="356"></div>'+
+          '<div onclick="openLightbox('+idx+')"><img src="thumb/'+names[idx]+'.jpg" alt="'+labels[idx]+'" width="200" height="356"></div>'+
           '<div class="label">'+labels[idx]+'</div>'+
-          '<button class="buy-one" onclick="event.stopPropagation();buySingle('+idx+')">¥2 单买</button>';
+          '<button class="dl-one" onclick="event.stopPropagation();downloadSingle('+idx+')">⬇ 下载</button>';
         grid.appendChild(card);
       })(i);
     }
@@ -396,41 +254,18 @@ document.addEventListener('keydown', function(e){
   if(e.key==='Escape') closeLightbox();
 });
 
-// ═══ 解锁 ═══
-function unlock(){
-  var pw = document.getElementById('pwInput').value.trim();
-  if(pw === UNLOCK_PASSWORD){
-    unlocked = true;
-    document.getElementById('dlBtns').classList.add('show');
-    document.getElementById('pwWrong').style.display = 'none';
-    document.getElementById('pwInput').style.borderColor = '#5a8a5a';
-  } else {
-    document.getElementById('pwWrong').style.display = 'block';
-    document.getElementById('pwInput').style.borderColor = '#c06a6a';
-  }
-}
-
 // ═══ 下载 ═══
 function downloadPack(){
-  if(!unlocked) return;
   var a = document.createElement('a');
   a.href = '轻言AI原创壁纸_10张.zip';
   a.download = '轻言AI原创壁纸_10张.zip';
   a.click();
 }
 
-function buySingle(idx){
-  if(!unlocked){ alert('请先在下方输入解锁密码\n\n赞赏 ¥2 截图发微信获取密码'); return; }
+function downloadSingle(idx){
   var a = document.createElement('a');
   a.href = names[idx] + '.jpg';
   a.download = '轻言原创插画_'+labels[idx]+'.jpg';
-  a.click();
-}
-
-function downloadFreeSample(){
-  var a = document.createElement('a');
-  a.href = '01-ghibli.jpg';
-  a.download = '轻言原创插画壁纸_免费体验.jpg';
   a.click();
 }
 </script>
